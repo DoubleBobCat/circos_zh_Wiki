@@ -3,29 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: Common Errors
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 9\. Common Errors
-
+## Common Errors
+### lesson
 If Circos halts with an error, before contacting me or posting to the
 [discussion group](https://groups.google.com/group/circos-data-visualization),
 please read the error message first.
@@ -45,13 +27,10 @@ To help you diagnose the problem, use Circos' [debugging
 facility](/documentation/tutorials/configuration/debugging/) to track the
 program as it runs. Turn on full debugging, if necessary
 
-    
-    
+```    
     > circos -debug_group _all
-    
-
-### reporting bugs and obtaining support
-
+```
+#### reporting bugs and obtaining support
 If you still cannot resolve the issue, please [write to the discussion
 group](https://groups.google.com/group/circos-data-visualization).
 
@@ -64,8 +43,7 @@ If you need help with an image, provide
   * all configuration files (don't forget `ideogram.conf`, `ticks.conf` and others) 
   * all data files (don't forget your karyotype file!) 
 
-### contacting me
-
+#### contacting me
 If I think you haven't read this section then you may assume I won't read your
 message.
 
@@ -85,10 +63,8 @@ expect please send me the image.
 If you email me before posting to the group I will tell you to post to the
 group.
 
-### common errors and problems
-
-#### Perl on Windows—can't figure it out?
-
+#### common errors and problems
+##### Perl on Windows—can't figure it out?
 If you are running Circos on Windows, you may be unfamiliar with Perl. Please
 read the [Windows vs
 UNIX](/documentation/tutorials/configuration/unix_vs_windows/) tutorial before
@@ -100,13 +76,11 @@ There are plenty of excellent Perl tutorials online for both UNIX and Windows.
 Make use of them. Remember, you don't need to know any Perl, only how to
 install it and call it to run Circos.
 
-#### Circos errors
-
+##### Circos errors
 This is what a typical Circos error looks like. I have tried to make them
 clear.
 
-    
-    
+```    
       *** CIRCOS ERROR ***
     
       CONFIGURATION FILE ERROR
@@ -130,14 +104,11 @@ clear.
     	Circos::Configuration::validateconfiguration() called at 
                /home/martink/work/circos/svn/bin/../lib/Circos.pm line 149
     	Circos::run('Circos') called at /home/martink/bin/circos line 229
-    
-
-#### configuration file error
-
+```
+##### configuration file error
 This is one of the most common errors reported by users.
 
-    
-    
+```    
       *** CIRCOS ERROR ***
     
       CONFIGURATION FILE ERROR
@@ -149,8 +120,7 @@ This is one of the most common errors reported by users.
     
       If you do not use the -conf flag, Circos will attempt to look for a file
       circos.conf in several reasonable places such as . etc/ ../etc
-    
-
+```
 This error appears because Circos cannot find a configuration file, required
 to generate the image, anywhere within the current directory or
 subdirectories.
@@ -158,11 +128,9 @@ subdirectories.
 Windows users experience this error frequently. For example, if you've
 unpacked Circos in `D:\circos-0.67` and run this command
 
-    
-    
+```    
     C:\My Documents>perl D:\circos-0.67\bin\circos 
-    
-
+```
 Circos will look within `C:\My Documents` for a configuration file. If you've
 just installed Circos, no configuration file will be found.
 
@@ -170,44 +138,35 @@ Instead, you want to run Circos in a directory from which the configuration
 file can be easily referenced. There is an example image that is bundled with
 the distribution, found in `example/`.
 
-    
-    
+```    
     C:\My Documents>cd D:\circos-0.67\example
     D:\circos-0.67\example>perl D:\circos-0.67\bin\circos -conf etc\circos.conf
-    
-
-#### configuration file import
-
+```
+##### configuration file import
 If you are importing configuration files using <<include ...>>, make sure you
 understand how the path resolution works. This is described in the
 [Configuration Files
 tutorial](/documentation/tutorials/configuration/configuration_files).
 
-#### missing units
-
+##### missing units
 Many configuration parameters require units (see tutorial 1.2). An error like
 this
 
-    
-    
+```    
       Unable to convert a value [0.005] from one unit [n] to another [b]. The
       following from->to combinations were expected: r->b u->b
-    
-
+```
 means that the value `0.005` was expected to have a unit `r` (relative) or `u`
 (chromosome unit) for conversion to `b` (base), but was found to have unit `n`
 (explicit code for no unit).
 
 If you do not define a required parameter the error will look like this
 
-    
-    
+```    
       The parameter [ideogram/thickness] was not defined. It needs to be defined and
       have one of these units [r,p].
-    
-
-#### slow performance
-
+```
+##### slow performance
 Some parts of the code are less (or more) optimized than others. In
 particular, text tracks can take a long time to render. For example, if you've
 asked to draw 50,000,000 data points, prepare to wait (and be disappointed
@@ -217,4 +176,5 @@ Turn on benchmarking using `-debug_group +timer` to add timings to the debug
 reportingoutput. See the
 [Debugging](/documentation/tutorials/configuration/debugging/) tutorial for
 more information.
-
+### images
+### configuration

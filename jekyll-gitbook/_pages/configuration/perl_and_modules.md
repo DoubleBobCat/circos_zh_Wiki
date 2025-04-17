@@ -3,29 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: Required Perl Modules
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 6\. Perl and Modules
-
+## Required Perl Modules
+### lesson
 If you are having trouble with installation of Perl or modules, use online
 resources that explain the details of how to [download
 Perl](https://www.perl.org/get.html), get it working
@@ -82,106 +64,85 @@ need to compile the Circos code — it is read in by the Perl executable (that
 ships with, or has been installed, for your operating system), which in turn
 interprets it, compiles it and runs the code.
 
-### Checking for Perl
-
-#### Checking for Perl on UNIX
-
+#### Checking for Perl
+##### Checking for Perl on UNIX
 For UNIX and Mac OS X users, Perl is likely already installed on your system,
 as part of the base installation.
 
 To check this, run this command at the terminal
 
-    
-    
+```    
     > which perl
-    
-
+```
 If you have perl installed and the executable is in your `PATH` (it is
 unlikely that Perl is installed but not in your `PATH`, the `which` command
 will return something like
 
-    
-    
+```    
     > which perl
     /usr/bin/perl
     # or perhaps
     /usr/local/bin/perl
-    
-
+```
 or some other location, depending on your installation. If the `which` command
 returns nothing, it's likely that you do not have Perl installed.
 
 To check the version of installed Perl
 
-    
-    
+```    
     > perl -v
     This is perl, **v5.10.0** built for ...
-    
-
+```
 Anything earlier than 5.8 should be upgraded.
 
 Circos will use the perl binary in your `PATH`. If you are on a UNIX system,
 whatever `which` returns
 
-    
-    
+```    
     > which perl
-    
-
+```
 will be the interpreter that is used.
 
-#### managing multiple perl installations on UNIX
-
+##### managing multiple perl installations on UNIX
 You can have installations of various versions of Perl, helpful if you want to
 test out a new version without disturbing production versions.
 
 For example, I have Perl 5.8, 5.10, 5.14 and 5.18 installed in
 
-    
-    
+```    
     ~/perl/perl.5.8.7
     ~/perl/perl.5.10.0
     ~/perl/perl.5.14.2
     ~/perl/perl.5.18.1
-    
-
+```
 To easily call any of these versions, I have symbolic links set up from
 `~/bin`, which is in my `PATH`
 
-    
-    
+```    
     ~/bin/perl58  -> ~/perl/perl/5.8.7/bin/perl
     ~/bin/perl510 -> ~/perl/perl/5.10.0/bin/perl
     ~/bin/perl514 -> ~/perl/perl/5.14.2/bin/perl
     ~/bin/perl518 -> ~/perl/perl/5.18.1/bin/perl
-    
-
+```
 For example,
 
-    
-    
+```    
     # use Perl 5.10
     > perl510 script.pl
     # use Perl 5.14
     > perl514 script.pl
-    
-
+```
 My production Perl is 5.14.2, so
 
-    
-    
+```    
     ~/bin/perl -> ~/bin/perl514
-    
-
+```
 which calls Perl 5.14 when I use the `perl` command.
 
-    
-    
+```    
     # run the production version, Perl 5.14
     > perl script.pl
-    
-
+```
 If you are managing multiple versions of Perl, you'll need to install modules
 for each version of Perl you have installed. This is inconvenient but required
 because the modules compiled by one version may not be compatible with
@@ -190,8 +151,7 @@ another.
 Using the CPAN shell makes installation relatively painless. Make sure you
 call it with the right version!
 
-    
-    
+```    
     # install with production version, Perl 5.14
     > perl -MCPAN -e shell
     ...
@@ -201,35 +161,28 @@ call it with the right version!
     > perl510 -MCPAN -e shell
     ...
     cpan[1]> install Config::General
-    
-
+```
 You can also use `cpanminus`. On Ubuntu, use `apt-get`
 
-    
-    
+```    
     # if you need cpanminus
     sudo apt-get install cpanminus
     # now install any missing modules
     sudo cpanm Clone Config::General Font::TTF::Font GD GD::Polyline Math::Bezier Math::Round Math::VecStat 
                Params::Validate Readonly Regexp::Common SVG Set::IntSpan Statistics::Basic Text::Format
-    
-
-#### Checking for Perl on Windows
-
+```
+##### Checking for Perl on Windows
 If you are running Windows, it is unlikely that you have Perl installed. Perl
 installation is described in the [Perl and
 Modules](/documentation/tutorials/configuration/perl_and_modules) section.
 
 To check the version of installed Perl,
 
-    
-    
+```    
     C:> perl -v
     This is perl, **v5.10.0** built for ...
-    
-
-### Installing Perl Modules
-
+```
+#### Installing Perl Modules
 Even if you already have perl, chances are good that you are going to need a
 few additional modules to make Circos run. Perl modules are third-party code
 that adds functionality to the core language.
@@ -238,8 +191,7 @@ Your installation of Perl will include [core
 modules](https://perldoc.perl.org/index-modules-A.html). In addition to these,
 you'll likely need to install some modules, such as
 
-    
-    
+```    
     [Config::General](https://search.cpan.org/~tlinden/Config-General-2.51/General.pm) (v2.50 or later)
     [Font::TTF](https://search.cpan.org/~mhosken/Font-TTF-1.02/)
     [GD](https://search.cpan.org/~lds/GD-2.46/GD.pm)
@@ -252,13 +204,11 @@ you'll likely need to install some modules, such as
     [Regexp::Common](https://search.cpan.org/~abigail/Regexp-Common-2011121001/lib/Regexp/Common.pm)
     [Set::IntSpan](https://search.cpan.org/~swmcd/Set-IntSpan-1.16/IntSpan.pm) (v1.16 or later)
     [Text::Format](https://search.cpan.org/~shlomif/Text-Format-0.58/lib/Text/Format.pm)
-    
-
+```
 To list all the required modules and check whether they are installed, use
 `-modules`.
 
-    
-    
+```    
     > circos -modules
     ok       1.26 Carp
     ok       0.37 Clone
@@ -295,24 +245,20 @@ To list all the required modules and check whether they are installed, use
     ok       2.02 Text::Balanced
     ok       0.53 Text::Format
     ok     1.9725 Time::HiRes
-    
-
-#### Installing Perl Modules on UNIX
-
+```
+##### Installing Perl Modules on UNIX
 To install these modules, use the [CPAN
 module](https://search.cpan.org/~andk/CPAN-1.9600/lib/CPAN.pm) to quickly
 download, compile and install them. CPAN will follow dependencies and
 generally do the right thing. Windows users should use their Perl's
 installation package manager (see below).
 
-    
-    
+```    
     > perl -MCPAN -e shell
     ...
     cpan[1]>install Math::Bezier
     ...
-    
-
+```
 If the process above fails, or you prefer to do it yourself, download each
 module from [CPAN](https://search.cpan.org). Many [module installation
 tutorials](https://perldoc.perl.org/perlmodinstall.html) are already
@@ -326,8 +272,7 @@ equivalent but require slightly different commands.
 To install a module that uses the `Makefile.PL` system, such as
 [Set::IntSpan](https://search.cpan.org/~swmcd/Set-IntSpan-1.16/IntSpan.pm).
 
-    
-    
+```    
     # download module
     > wget https://search.cpan.org/CPAN/authors/id/S/SW/SWMCD/Set-IntSpan-1.16.tar.gz
     # unpack archive
@@ -356,15 +301,13 @@ To install a module that uses the `Makefile.PL` system, such as
     Result: PASS
     # install (keep in mind file permission requirements, as described below)
     > **make install**
-    
-
+```
 Modules like [Params::Validate](https://search.cpan.org/~drolsky/Params-
 Validate-0.95/) use the [Build
 system](https://search.cpan.org/~dagolden/Module-
 Build-0.3800/lib/Module/Build.pm) and are installed as follows.
 
-    
-    
+```    
     # download module
     > wget https://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/Params-Validate-0.95.tar.gz
     # unpack archive
@@ -395,25 +338,21 @@ Build-0.3800/lib/Module/Build.pm) and are installed as follows.
     Result: PASS
     # install (keep in mind file permission requirements, as described below)
     > **./Build install**
-    
-
-#### Installing Perl Modules on Mac OS X
-
+```
+##### Installing Perl Modules on Mac OS X
 CPAN should work seamlessly. Many users have difficulty with the GD module,
 which has numerous dependencies. Paulo Nuin has a nice blog entry that shows
 how he [handled his Mac OS X Circos
 installation](https://zientzilaria.heroku.com/blog/2012/06/03/installing-
 circos-on-os-x/).
 
-#### Installing Perl Modules on Windows
-
+##### Installing Perl Modules on Windows
 Both [Strawberry Perl](https://www.strawberryperl.com) and [ActiveState
 Perl](https://www.activestate.com/activeperl) have package managers that help
 you install, update and remove modules. Where possible, use the manager to
 install modules instead of the CPAN shell.
 
-### Installing `libpng`, `freetype`, `libgd` and `GD`
-
+#### Installing `libpng`, `freetype`, `libgd` and `GD`
 About half of the support questions in the [Google
 Group](https://groups.google.com/forum/#!forum/circos-data-visualization) are
 about installing Perl's `GD` module, which is the interface to the `libgd`
@@ -429,8 +368,7 @@ installed. These are mature libraries and newer versions are likely to be
 minor bug releases. The exception is `GD`—I was unable to successfully compile
 v2.56 (`boot_GD` symbol warning which I could not fix). However v2.53 worked.
 
-    
-    
+```    
     > tar xvfz [libpng-1.6.14.tar.gz](/distribution/lib/libpng-1.6.14.tar.gz)
     > cd libpng-1.6.14
     > ./configure —prefix=/usr/local
@@ -448,13 +386,11 @@ v2.56 (`boot_GD` symbol warning which I could not fix). However v2.53 worked.
     > ./configure —prefix=/usr/local
     > make
     > make install
-    
-
+```
 You should now have libraries in `/usr/local/lib` as we as some header files
 in `/usr/local/include`.
 
-    
-    
+```    
     -rwxr-xr-x  1 root  wheel   650336 21 Nov 11:15 libfreetype.6.dylib
     -rw-r--r--  1 root  wheel  3676456 21 Nov 11:15 libfreetype.a
     lrwxr-xr-x  1 root  wheel       19 21 Nov 11:15 libfreetype.dylib -> libfreetype.6.dylib
@@ -471,12 +407,10 @@ in `/usr/local/include`.
     lrwxr-xr-x  1 root  wheel       17 21 Nov 11:13 libpng16.dylib -> libpng16.16.dylib
     -rwxr-xr-x  1 root  wheel      924 21 Nov 11:13 libpng16.la
     drwxr-xr-x  6 root  wheel      204 21 Nov 11:15 pkgconfig/
-    
-
+```
 Now install `libgd`, linking to the libraries installed above
 
-    
-    
+```    
     > tar xvfz [libgd-2.1.0.tar.gz](/distribution/lib/libgd-2.1.0.tar.gz)
     > cd libgd-2.1.0
     > ./configure --with-png=/usr/local --with-freetype=/usr/local --with-jpeg=/usr/local —prefix=/usr/local
@@ -497,18 +431,15 @@ Now install `libgd`, linking to the libraries installed above
     
     > make
     > make install
-    
-
+```
 You now have libgd in `/usr/local/lib`
 
-    
-    
+```    
     -rwxr-xr-x  1 root  wheel   389372 19 Nov 14:47 libgd.3.dylib
     -rw-r--r--  1 root  wheel  1217200 19 Nov 14:47 libgd.a
     lrwxr-xr-x  1 root  wheel       13 19 Nov 14:47 libgd.dylib -> libgd.3.dylib
     -rwxr-xr-x  1 root  wheel     1139 19 Nov 14:47 libgd.la
-    
-
+```
 as well as some binaries in `/usr/local/bin`. In particular, you have
 `/usr/local/bin/glib-config`, which provides the configuration for your libgd
 installation
@@ -519,8 +450,7 @@ used a different `-prefix` in compiling these dependencies (see above), adjust
 these parameters accordingly. For example, if you compiled `libpng` with
 `-prefix=/my/path` then use `--with-png=/my/path/`.
 
-    
-    
+```    
     > /usr/local/bin/gdlib-config —all
     
     GD library  2.1.0
@@ -530,16 +460,14 @@ these parameters accordingly. For example, if you compiled `libpng` with
     libs:       -ljpeg -lz  -L/usr/local/lib -lpng16 -L/usr/local/lib -lfreetype -lz -liconv
     libdir:     /usr/local/lib
     features:   GD_JPEG GD_FREETYPE GD_PNG GD_GIF GD_GIFANIM GD_OPENPOLYGON
-    
-
+```
 You must have `GD_FREETYPE` and `GD_PNG` for Circos to run. The other
 features, such as support for JPEG and TIFF are optional. In this example,
 I’ve included the JPEG library in the installation.
 
 Now, install the Perl interface to libgd — the GD module.
 
-    
-    
+```    
     > tar xvfz [GD-2.53.tar.gz](/distribution/lib/GD-2.53.tar.gz)
     > perl Makefile.PL
     
@@ -560,12 +488,10 @@ Now, install the Perl interface to libgd — the GD module.
     
     > perl -MGD -e 'print $GD::VERSION,”\n”’
     > 2.53
-    
-
+```
 Test that the modules are installed using
 
-    
-    
+```    
     > circos -modules
     …
     ok       0.39 Font::TTF::Font
@@ -574,17 +500,13 @@ Test that the modules are installed using
     ok       2.39 Getopt::Long
     ok       1.16 IO::File
     …
-    
-
-### Errors
-
-#### Missing modules
-
+```
+#### Errors
+##### Missing modules
 If you are missing a module, you'll see an error like the following when you
 run Circos.
 
-    
-    
+```    
     *** REQUIRED MODULE(S) MISSING ***
     
     You are missing one or more Perl modules, or these modules failed to load. Use CPAN to install it as described in this tutorial
@@ -592,32 +514,27 @@ run Circos.
     https://www.circos.ca/documentation/tutorials/configuration/perl_and_modules
     
     missing List::MoreUtils
-    
-
+```
 In the rare case that the internal error checking doesn't catch the missing
 module, you'll see something like this.
 
-    
-    
+```    
     Can't locate **List/MoreUtils.pm** in @INC (@INC contains: /usr/lib/perl5/5.14.2/i386-linux
     -thread-multi/usr/lib/perl5/5.14.2/usr/lib/perl5/site_perl/5.14.2/i386-linux-thread-multi
     /usr/lib/perl5/site_perl/5.14.2 /usr/lib/perl5/site_perl/usr/lib/perl5/vendor_perl
     /5.14.2/i386-linux-thread-multi /usr/lib/perl5/vendor_perl/5.14.2/usr/lib/perl5/vendor_
     perl .) at ./bin/circos line 121.
-    
-
+```
 In this case Perl is complaining that the module `List::MoreUtils` cannot be
 found, which you'll need to install.
 
-#### Permission errors
-
+##### Permission errors
 On UNIX systems, if during installation you obtain a file or directory
 creation permission error, you are likely attempting to write the module files
 into your system's perl install tree which is owned by root (administrative
 user).
 
-    
-    
+```    
     ...
     Running make test
     PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e"  
@@ -632,27 +549,21 @@ user).
     5.8.8/ExtUtils/Install.pm line 112
     make: *** [pure_site_install] Error 13
        /usr/bin/make install  -- NOT OK
-    
-
+```
 Repeat the installation as root (administrator)
 
-    
-    
+```    
     > sudo su
     > perl -MCPAN -e shell
     ...
-    
-
-### `make` on Mac OS X
-
+```
+#### `make` on Mac OS X
 If modules won't install because your system complains that it doesn't have
 `make`.
 
-    
-    
+```    
     bash: make command not found
-    
-
+```
 you need to install [Xcode](https://developer.apple.com/xcode) development
 tools, an optional component available on your Mac OS X DVD. Be aware that
 there have been [reports of Xcode 4 causing problems with
@@ -660,19 +571,15 @@ Perl](https://www.perlmonks.org/?node_id=896789).
 
 To test whether you have make
 
-    
-    
+```    
     > which make
     /usr/bin/make
-    
-
+```
 Sometimes an unsuccessful make can be due to an error during the compilation.
 
-    
-    
+```    
     Could not make: Unknown error
-    
-
+```
 If you know you have Xcode (`which make` confirms this typically as
 `/usr/bin/make`), but are having trouble installing the module with CPAN,
 install (or attempt to, paying close attention to the errors) the module
@@ -680,13 +587,12 @@ manually.
 
 For example, if `Params::Validate` was giving problems,
 
-    
-    
+```    
     > wget https://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/Params-Validate-0.95.tar.gz
     > tar xvfz Params-Validate-0.95.tar.gz
     > cd Params-Validate-0.95
     > ./Build
     # pay attention to any the build errors in the next step
     > Build make
-    
-
+```### images
+### configuration

@@ -3,50 +3,25 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: ideograms
-title: Drawing Ideograms
+title: Labels
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 3 — Drawing Ideograms
-
-## 9\. Labels
-
-[Lesson](/documentation/tutorials/ideograms/labels/lesson)
-[Images](/documentation/tutorials/ideograms/labels/images)
-[Configuration](/documentation/tutorials/ideograms/labels/configuration)
-
+## Labels
+### lesson
 Each ideogram has a label field in the karyotype file
 
-    
-    
+```    
     #
     # A name of chromosome used in coordinate files
     # B label of chromosome and derived ideograms
     #
     #     A    B
     chr - hs12 12 0 132349534 green
-    
-
+```
 This label field defines the text that is shown in the figure. This text is
 optional and can be positioned and formatted flexibly.
 
-### ideograms vs chromosomes
-
+#### ideograms vs chromosomes
 Keep the difference between chromosomes and ideograms in mind. The
 _chromosome_ is the structure on which you define position of data. The
 _ideogram_ is the visual representation of the chromosome or a region of a
@@ -60,25 +35,21 @@ When chromosomes are broken up into multple ideograms, each ideogram is
 identified by a tag (e.g. `a b c`). You can have this tag added to the label
 using `label_with_tag` as described below.
 
-### fonts
-
+#### fonts
 Circos supports True Type and Open Type fonts. These fonts are defined in the
 <font> block. In all of the tutorials this definition is included via the
 `colors_fonts_patterns.conf` file, which defines <fonts>, <colors> and
 <patterns> blocks.
 
-    
-    
+```    
     # circos.conf
     <<include colors_fonts_patterns.conf>>
     ...
-    
-
+```
 The <font> block is used to associate a font file (.TTF or .OTF) with a unique
 name, such as "normal", "bold", or "condensed". For example,
 
-    
-    
+```    
     light          = fonts/modern/cmunbmr.otf
     normal         = fonts/modern/cmunbmr.otf
     default        = fonts/modern/cmunbmr.otf
@@ -87,20 +58,17 @@ name, such as "normal", "bold", or "condensed". For example,
     italic         = fonts/modern/cmunbmo.otf
     bolditalic     = fonts/modern/cmunbxo.otf
     italicbold     = fonts/modern/cmunbxo.otf
-    
-
+```
 To use the font, specify it by using its definition (e.g. light), _not_ the
 font file name (e.g. `fonts/modern/cmunbmbr.otf`). If you specify a font
 definition that has not been defined, `default` is used. It's a good idea to
 always have a `default` definition.
 
-### ideogram labels
-
+#### ideogram labels
 Ideogram labels are controlled by these parameters within the <ideogram>
 block.
 
-    
-    
+```    
     <ideogram>
     show_label     = yes
     label_with_tag = yes
@@ -114,34 +82,27 @@ block.
     label_format   = eval(sprintf("chr%s",var(label)))
     ...
     </ideogram>
-    
-
-### label tags
-
+```
+#### label tags
 The `label_with_tag` parameter controls whether a tag associated with the
 ideogram region is included with the label. Tags are used to identify
 ideograms from the same chromosome
 
-    
-    
+```    
     # tags "a" and "b"
     chromosomes = hs1[a]:50-75,hs1[b]:100-125
-    
-
-### label font
-
+```
+#### label font
 The `label_font` specifies the name of the font (using its label, as defined
 in the <fonts> block.
 
-### label position
-
+#### label position
 The `label_radius` controls the radial position of the ideogram label. Here,
 it is best to put the label relative to the ideogram outer (or inner) radius.
 If you would like the label to be centered at this radius, use `label_center =
 yes`. A few examples are
 
-    
-    
+```    
     # 50 pixels outside the outer ideogram radius
     label_radius = dims(ideogram,radius_outer) + 50p
     
@@ -156,76 +117,60 @@ yes`. A few examples are
     
     # 50 pixels inside the image radius
     label_radius = dims(image,radius) - 50p
-    
-
-### label orientation
-
+```
+#### label orientation
 You can make the baseline of the ideogram labels to be parallel to the circle
 by using the `label_parallel` parameter within the ideogram block.
 
-### label case
-
+#### label case
 To override the way the label is displayed, you can force upper or lower case
 with `label_case`, which can be set to `upper` or `lower`.
 
-    
-    
+```    
     # ideogram labels will be uppercase
     label_case = upper
-    
-
-### label format
-
+```
+#### label format
 You can define the format of the label flexibly by using `sprintf`. Here, the
 label of the chromosome (e.g. 1) is prefixed with the string "chr".
 
-    
-    
+```    
     label_format = eval(sprintf("chr%s",var(label)))
-    
-
+```
 Here are a few other examples of the use of `label_format`. In all cases
 `var()` refers to a property of the ideogram, such as `chr` (e.g. `hs10`) or
 `label` (e.g. `10`).
 
-    
-    
+```    
     # show labels only for chromosomes 1-5
     label_format     = eval( var(chr) =~ /hs[1-5]$/ ? var(label) : "")
     
     # hide label for chromosome hs10
     label_format     = eval( var(chr) eq "hs10" ? "" : var(label))
-    
-
+```
 In some cases, you may want to simplify the ideogram label. For example, if
 all your labels contain the string `ctg.` (e.g. `ctg.123`) and you want to
 trim it, use the helper function `replace(str,rx,replace_str)`.
 
-    
-    
+```    
     # replace the string ctg. in the label with empty string (i.e. remove the string)
     label_format     = eval( replace(var(label),"ctg.","") )
     
     # use the chromosome name as the label, but replace "hs" with "human "
     label_format     = eval( replace(var(chr),"hs","human ") )
-    
-
+```
 You can use other properties of the ideogram in the label
 
-    
-    
+```    
     # include length in the label (divided by 1,000,000 and suffixed with "Mb")
     label_format     = eval( sprintf("%s %dMb",var(label),var(size)/1e6) )
-    
-
-### help with `var()`
-
+```
+#### help with `var()`
 For a full list of parameter names that are available for the `var()`
 function, use `var(?)`. When Circos parses this it will return (and quit) a
 list of parameters with their values.
 
-    
-    
+```    
     # e.g. using
     label_format     = eval( sprintf("%s %dMb",var(label),**var(?)** /1e6) )
     
@@ -256,8 +201,172 @@ list of parameters with their values.
                    start * 0
                      tag * hs1
                thickness * 75
-    
-
+```
 For now, the parameters listed as `HASH`, `ARRAY`, or an object (e.g.
 `Set::IntSpan`) cannot be polled by `var()`.
+### images
+![Circos tutorial image -
+Labels](/documentation/tutorials/ideograms/labels/img/01.png) ![Circos
+tutorial image - Labels](/documentation/tutorials/ideograms/labels/img/02.png)
+### configuration
+#### circos.conf
+```    
+    <<include etc/colors_fonts_patterns.conf>>
+    
+    <<include ideogram.conf>>
+    <<include ticks.conf>>
+    
+    show_ticks* = no
+    
+    <image>
+    <<include etc/image.conf>>
+    </image>
+    
+    karyotype = data/karyotype/karyotype.human.txt
+    
+    chromosomes_units           = 1000000
+    chromosomes_display_default = yes
+    
+    <<include etc/housekeeping.conf>>
+```
+  
 
+* * *
+
+#### bands.conf
+```    
+    show_bands            = no
+    fill_bands            = yes
+    band_stroke_thickness = 2
+    band_stroke_color     = white
+    band_transparency     = 4
+```
+  
+
+* * *
+
+#### ideogram.conf
+```    
+    <ideogram>
+    
+    <spacing>
+    
+    default = 10u
+    break   = 5u
+    
+    axis_break_at_edge = yes
+    axis_break         = yes
+    axis_break_style   = 2
+    
+    <break_style 1>
+    stroke_color = black
+    fill_color   = blue
+    thickness    = 0.25r
+    stroke_thickness = 2p
+    </break>
+    
+    <break_style 2>
+    stroke_color     = black
+    stroke_thickness = 5p
+    thickness        = 2r
+    </break>
+    
+    </spacing>
+    
+    <<include ideogram.position.conf>>
+    <<include ideogram.label.conf>>
+    <<include bands.conf>>
+    
+    </ideogram>
+``````
+  
+
+* * *
+
+#### ideogram.label.conf
+```    
+    show_label       = yes
+    label_font       = bold
+    
+    # 50 pixels outside the outer ideogram radius
+    label_radius = dims(ideogram,radius_outer) + 50p
+    
+    # 5% of inner radius outside outer ideogram radius
+    # label_radius = dims(ideogram,radius_outer) + 0.05r
+    
+    # inside ideogram
+    # label_radius = (dims(ideogram,radius_inner)+dims(ideogram,radius_outer))/2-24
+    
+    # 100 pixels inside the ideogram radius
+    # label_radius = dims(ideogram,radius_inner) - 100p
+    
+    label_with_tag   = yes
+    label_size       = 48
+    label_parallel   = yes
+    label_case       = upper
+```
+  
+
+* * *
+
+#### ideogram.position.conf
+```    
+    radius           = 0.90r
+    thickness        = 100p
+    fill             = yes
+    fill_color       = black
+    stroke_thickness = 2
+    stroke_color     = black
+```
+  
+
+* * *
+
+#### ticks.conf
+```    
+    show_ticks          = yes
+    show_tick_labels    = yes
+    
+    <ticks>
+    skip_first_label = no
+    skip_last_label  = no
+    radius           = dims(ideogram,radius_outer)
+    tick_separation  = 3p
+    label_separation = 1p
+    multiplier       = 1e-6
+    color            = black
+    thickness        = 4p
+    size             = 20p
+    
+    <tick>
+    spacing        = 1u
+    show_label     = no
+    thickness      = 2p
+    color          = dgrey
+    </tick>
+    
+    <tick>
+    spacing        = 5u
+    show_label     = no
+    thickness      = 3p
+    color          = vdgrey
+    </tick>
+    
+    <tick>
+    spacing        = 10u
+    show_label     = yes
+    label_size     = 20p
+    label_offset   = 10p
+    format         = %d
+    grid           = yes
+    grid_color     = dgrey
+    grid_thickness = 1p
+    grid_start     = 0.5r
+    grid_end       = 0.999r
+    </tick>
+    
+    </ticks>
+```
+  
+
+* * *

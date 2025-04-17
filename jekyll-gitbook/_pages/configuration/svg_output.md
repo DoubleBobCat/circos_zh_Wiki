@@ -3,37 +3,15 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: SVG Output
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 11\. SVG Output
-
-[Lesson](/documentation/tutorials/configuration/svg_output/lesson)
-[Configuration](/documentation/tutorials/configuration/svg_output/configuration)
-
+## SVG Output
+### lesson
 Circos is capable of producing both PNG and SVG images. This section discusses
 SVG files.
 
-## SVG Output
-
+### SVG Output
 SVG stands for _scalable vector graphics_ and it is a format that defines an
 image using vector-based primitives (lines, squares, rectangles, etc) rather
 than pixels. SVG images can be turned into a bitmap (rasterized) at any
@@ -43,31 +21,24 @@ Inkscape.
 
 To turn SVG output on, set the `svg` flag in the <image> block
 
-    
-    
+```    
     <image>
     ...
     svg = yes
     ...
     </image>
-    
-
+```
 or use the `-svg` command-line flag
 
-    
-    
+```    
     bin/circos -svg
-    
-
+```
 You can also suppress the creation of the SVG file using
 
-    
-    
+```    
     bin/circos -nosvg 
-    
-
-## Fonts in SVG files
-
+```
+### Fonts in SVG files
 Text elements in SVG files have the `font-family` attribute, which specifies
 the font for the text element.
 
@@ -80,4 +51,23 @@ figure were installed.
 
 If your text appears smaller than expected, increase the `svg_font_scale`
 parameter in `etc/housekeeping.conf`.
+### images
+### configuration
+#### circos.conf
+```    
+    <image>
+    
+    ...
+    
+    # png on
+    png = yes
+    # svg on
+    svg = yes
+    
+    ...
+    
+    </image>
+``````
+  
 
+* * *

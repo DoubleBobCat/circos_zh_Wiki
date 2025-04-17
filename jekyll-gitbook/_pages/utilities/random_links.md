@@ -3,60 +3,33 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: utilities
-title: Helper Tools
+title: Generating Random Link Data
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 10 — Helper Tools
-
-## 1\. Generating Random Link Data
-
+## Generating Random Link Data
+### lesson
 [Lesson](/documentation/tutorials/utilities/random_links/lesson)
 [Images](/documentation/tutorials/utilities/random_links/images)
 
-## script location
-
-    
-    
+### script location
+```    
     tools/randomlinks
-    
-
-## script usage
-
-    
-    
+```
+### script usage
+```    
     > cd tools/randomlinks
     > ./run
     Done. Now look in data/links.txt.
-    
-
+```
 To get the full manpage, use -man.
 
-    
-    
+```    
     > cd tools/randomlinks
     > bin/randomlinks -man
-    
-
+```
 Adjust the configuration file etc/randomlinks.conf to suit your needs.
 
-## details
-
+### details
 The purpose of this script is largely for debugging. If you don't have any
 link data, you can generate some random link relationships between chrososomes
 sampled from a karyotype file.
@@ -68,13 +41,11 @@ expressions that define chromosome pairs.
 
 For example, the following ruleset
 
-    
-    
+```    
     rule = . . 2 0
     rule = chr12 chr14 10 2
     rule = chr15 chr20 r5
-    
-
+```
 defines three rules. Rules are evaluated in increasing order of specificity.
 The first rule affects all chromosomes and sets the baseline number of links
 between any chromosome pair to 2 (avg=2,sd=0). The next rule defines the
@@ -90,8 +61,7 @@ get you started.
 These random links are a great input to other link-related tools like
 bundlelinks and orderchr.
 
-## randomlinks manpage
-
+### randomlinks manpage
   * NAME
   * SYNOPSIS
   * DESCRIPTION
@@ -105,23 +75,19 @@ bundlelinks and orderchr.
 
 * * *
 
-# NAME
-
+## NAME
 randomlinks - generate a data file with random links between chromosomes
 
 * * *
 
-# SYNOPSIS
-
-    
-    
+## SYNOPSIS
+```    
       randomlinks -karyotype KARYOTYPE_FILE 
                   {-chr_rx REGEX } -size AVG[,SD] [-nointra] [-nointer]
 
 * * *
 
-# DESCRIPTION
-
+## DESCRIPTION
 Generate a Circos link file containing random links between chromosomes.
 Chromosomes are sampled from the karyotype file KARYOTYPE_FILE and optionally
 further filtered using the regular expression REGEX.
@@ -135,8 +101,7 @@ Intrachromosomal links can be avoided using -nointra. Similiarly,
 interchromosomal links can be avoided using -nointer. The -nointer option is
 much less useful.
 
-## Link Multiplicity Rules
-
+### Link Multiplicity Rules
 Given a filtered set of chromosomes (first sampled from the KARYOTYPE_FILE and
 then passed through the regular expression REGEX), the number of links joining
 any pair of chromosomes is determined by a set of rules.
@@ -166,8 +131,7 @@ For more details about the syntax of rules, see etc/randomlinks.conf.
 
 * * *
 
-# HISTORY
-
+## HISTORY
   * **10 Feb 2009 v0.3**  
 
 Minor bug fix.
@@ -182,23 +146,27 @@ Started and versioned.
 
 * * *
 
-# BUGS
-
+## BUGS
 * * *
 
-# AUTHOR
-
+## AUTHOR
 Martin Krzywinski
 
 * * *
 
-# CONTACT
-
-    
-    
+## CONTACT
+```    
       Martin Krzywinski
       Genome Sciences Centre
       Vancouver BC Canada
       www.bcgsc.ca
       martink@bcgsc.ca
+### images
+[Lesson](/documentation/tutorials/utilities/random_links/lesson)
+[Images](/documentation/tutorials/utilities/random_links/images)
 
+![Circos tutorial image - Generating Random Link
+Data](/documentation/tutorials/utilities/random_links/img/01.png)
+### configuration
+[Lesson](/documentation/tutorials/utilities/random_links/lesson)
+[Images](/documentation/tutorials/utilities/random_links/images)

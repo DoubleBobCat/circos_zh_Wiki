@@ -3,29 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: Colors
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 4\. Colors
-
+## Colors
+### lesson
 [Lesson](/documentation/tutorials/configuration/colors/lesson)
 [Images](/documentation/tutorials/configuration/colors/images)
 
@@ -79,30 +61,24 @@ Want to learn more about Perl? Try [learn.perl.org](https://learn.perl.org/)
 or read through the [Perl Journal
 archive](https://mk.bcgsc.ca/books/sapj/tpj).
 
-## color definitions
-
-### RGB and HSV
-
+### color definitions
+#### RGB and HSV
 Colors are defined using RGB or HSV values.
 
-    
-    
+```    
     red = 255,0,0    # RGB definition
     red = hsv(0,1,1) # HSV definition
-    
-
+```
 The range of RGB components is `[0..255]`. HSV values range is `H=[0,360]`
 (integer), `S=[0,1]` (float) and `V=[0,1]` (float).
 
-### transparent RGB values
-
+#### transparent RGB values
 RGB values can have an optional 4th field to indicate transparency. The
 transparency can be specified in the range [0,1] or [0,127]. Both map onto the
 same result. The minimum value (0) indicates full opacity while the maximum (1
 or 127) indicates full transparency.
 
-    
-    
+```    
     # 0 < alpha < 1 
     # 0 opaque
     # 1 transparent
@@ -114,67 +90,55 @@ or 127) indicates full transparency.
     # 0   opaque
     # 127 transparent
     red_also_faint = 255,0,0,102
-    
-
+```
 Please see [Transparent
 Link](/documentation/tutorials/recipes/transparent_links/) tutorial for
 discussion about automating definition of these colors.
 
-#### full transparency
-
+##### full transparency
 To create a fully transparent color (e.g. for an image with transparent
 background), you'll need to define a color named `transparent`. A transparent
 color still requires an RGB value (a strange artefact in gd implementation).
 Choose an RGB value that you aren't using elsewhere. Typically something like
 `1,0,0` will be suitable.
 
-    
-    
+```    
     # in color.conf
     transparent = 1,0,0
-    
-
+```
 The transparent color will be available using the name `transparent`. A
 synonym `clear` is also provided. To use the transparent color (e.g. for
 background),
 
-    
-    
+```    
     <image>
     ...
     background = transparent # 'clear' also works here 
     ...
     </image>
-    
-
+```
 The names `transparent` and `clear` are reserved. Do not use these two color
 names for other colors.
 
-### synonyms
-
+#### synonyms
 You can include synonyms for colors, by defining one color using the name of
 another color, instead of RGB or RGBA values.
 
-    
-    
+```    
     green  = 51,204,94
     orange = 255,136,0
     ...
     favourite        = green
     almost_favourite = orange
-    
-
+```
 Be careful not to create infinite lookup loops — these produce an error.
 
-    
-    
+```    
     # don't do this
     favourite = green
     green     = favourite
-    
-
-## <color> block
-
+```
+### <color> block
 The <colors> block contains all the color definitions.
 
 Circos comes with a large number of default color definitions (pure colors and
@@ -186,25 +150,20 @@ The best way to do this is to import the `etc/colors_fonts_patterns.conf` in
 your `circos.conf`. Importing this file will define colors, fonts and
 patterns, using the appropriate block structure.
 
-    
-    
+```    
     # circos.conf
     <<include etc/colors_fonts_patterns.conf>>
-    
-
+```
 For example, `etc/colors_fonts_patterns.conf` contains the following
 
-    
-    
+```    
     <colors>
     <<include etc/colors.conf>>
     </colors>
-    
-
+```
 In turn, `etc/colors.conf` has the following definitions
 
-    
-    
+```    
     # primary RGB colors
     ...
     
@@ -219,42 +178,33 @@ In turn, `etc/colors.conf` has the following definitions
     # HSV pure colors
     # see etc/colors.hsv.conf
     <<include colors.hsv.conf>>
-    
-
-## using colors
-
+```
+### using colors
 Colors are referenced using their RGB values or their names (see below).
 
-    
-    
+```    
     # using RGB values
     color = 107,174,241
     
     # using name
     color = blue
-    
-
+```
 When passing a color as an option in data files, the RGB values need to be
 delimited by `(...)`. For example, if you want to add a color to a link
 
-    
-    
+```    
     # using a color name
     chr1 100 200 chr2 200 250 color=blue,thickness=2
     
     # using RGB value
     chr1 100 200 chr2 200 250 color=(107,174,241),thickness=2
-    
-
-## predefined colors
-
-### named colors with tone prefix
-
+```
+### predefined colors
+#### named colors with tone prefix
 For each of the named colors `red`, `orange`, `yellow`, `green`, `blue`, and
 `purple`, the following are defined
 
-    
-    
+```    
     vvl{name} - very very light version of color
     vl{name}  - very light
     l{name}   - light
@@ -262,24 +212,20 @@ For each of the named colors `red`, `orange`, `yellow`, `green`, `blue`, and
     d{name}   - dark
     vd{name}  - very dark
     vvd{name} - very very dark
-    
-
+```
 The tone ladder is based on Brewer palette colors (see below).
 
-    
-    
+```    
     # points to Brewer color...
     orange = oranges-7-seq-4
     
     # ...which is defined in colors.brewer.conf as
     oranges-7-seq-4 = 253,141,60
-    
-
+```
 For example, for `red` we have `vvlred`, `vlred`, `lred`, `red`, `dred`,
 `vdred` and `vvdred`.
 
-    
-    
+```    
     vvlred = reds-7-seq-1
     vlred  = reds-7-seq-2
     lred   = reds-7-seq-3
@@ -287,19 +233,16 @@ For example, for `red` we have `vvlred`, `vlred`, `lred`, `red`, `dred`,
     dred   = reds-7-seq-5
     vdred  = reds-7-seq-6
     vvdred = reds-7-seq-7
-    
-
+```
 In the case of grey, additional `vvvlgrey` and `vvvdgrey` are available.
 
 Also defined are `white` and `black`.
 
-### named pure colors with tone prefix
-
+#### named pure colors with tone prefix
 For pure color versions of the above definitions (i.e. not based on Brewer
 palettes), use the `p` (pure) prefix to the color name.
 
-    
-    
+```    
     vvlp{name} - very very light version of color
     vlp{name}  - very light
     lp{name}   - light
@@ -307,22 +250,18 @@ palettes), use the `p` (pure) prefix to the color name.
     dp{name}   - dark
     vdp{name}  - very dark
     vvdp{name} - very very dark
-    
-
+```
 For example, for `red` we have `vvlpred`, `vlpred`, `lpred`, `pred`, `dpred`,
 `vdpred` and `vvdpred`.
 
-    
-    
+```    
     # pure orange
     porange  = 255,127,0
     
     # dark pure orange
     dporange = 234,110,0
-    
-
-### Brewer colors
-
+```
+#### Brewer colors
 Brewer colors compose [Brewer palettes](https://www.colorbrewer.org) which
 have been manually defined by Cynthia Brewer for their perceptual properties.
 
@@ -334,8 +273,7 @@ available for various number of colors (e.g. 3, 4, 5, ...).
 The syntax for a Brewer color name is `palettename-ncolors-palettetype-index`.
 The palette names, for each type, are
 
-    
-    
+```    
     # sequential (-seq-) (3-9 colors)
     blues
     bugn
@@ -376,8 +314,7 @@ The palette names, for each type, are
     set1 (3-9 colors)
     set2 (3-8 colors)
     set3 (3-12 colors)
-    
-
+```
 For example, purple-orange diverging 9-color palette colors are
 `puor-9-div-1`, `puor-9-div-2`, ..., `puor-9-div-9`.
 
@@ -391,49 +328,40 @@ influence how your figure is perceived (see my [Color Palettes
 Matter](https://mk.bcgsc.ca/brewer/talks/color-palettes-brewer.pdf)
 presentation).
 
-### HSV colors
-
+#### HSV colors
 You can use the HSV color space to define colors. To do so, specify the HSV
 values as hsv(h,s,v). For example,
 
-    
-    
+```    
     red = hsv(0,1,1)
-    
-
+```
 All pure HSV colors (s = 1, v = 1) are defined in `colors.hsv.conf`.
 
-    
-    
+```    
     hue000 = hsv(0,1,1)
     hue001 = hsv(1,1,1)
     ...
     hue359 = hsv(359,1,1)
     hue360 = hsv(360,1,1) # same as hue000
-    
-
-### chromosome color scheme
-
+```
+#### chromosome color scheme
 A set of colors named after chromosomes is also defined and corresponds to the
 chromosome color scheme used by [UCSC Genome Browser](https://genome.ucsc.edu)
 and other online resources. This is a standardized palette.
 
-    
-    
+```    
     chr1 = 153,102,0
     chr2 = 102,102,0
     chr3 = 153,153,30
     ...
     chrX = 153,153,153
     chrY = 204,204,204
-    
-
+```
 Another set of colors is named after cytogenetic band colors, typically
 reported in karyotype files. These colors define the G-staining shades seen in
 ideograms.
 
-    
-    
+```    
     gpos100 = 0,0,0
     gpos    = 0,0,0
     gpos75  = 130,130,130
@@ -445,14 +373,12 @@ ideograms.
     gneg    = 255,255,255
     acen    = 217,47,39
     stalk   = 100,127,164
-    
-
+```
 Because the original UCSC color palette is not uniform in brightness (e.g.
 chr10 is a very bright yellow, whereas chr1 is a dark brown), I make
 luminance-normalized (70, 80 and 90%) versions of these colors available.
 
-    
-    
+```    
     # 70% luminance
     lum70chr1
     ...
@@ -467,14 +393,12 @@ luminance-normalized (70, 80 and 90%) versions of these colors available.
     lum90chr1
     ...
     lum90chrY
-    
-
+```
 Given that Circos uses species prefix for chromosome names (e.g. human
 chromosomes are named `hsN` rather than `chrN`, I also provide synonyms for
 all the UCSC colors using the `chr` -> `hs` name.
 
-    
-    
+```    
     hs1 = chr1
     hs2 = chr2
     ...
@@ -482,10 +406,8 @@ all the UCSC colors using the `chr` -> `hs` name.
     lum90hs1 = lum80chr1
     lum90hs1 = lum90chr1
     ...
-    
-
-### unix colors
-
+```
+#### unix colors
 The file `etc/colors.unixnames.txt` defines a large number (700+) of named
 colors, taken from UNIX's [rgb.txt
 file](https://www.uize.com/examples/sortable-color-table.html). This file is
@@ -496,16 +418,13 @@ Many definitions in this file duplicate definitions in `colors.conf` (e.g.
 blues-7-seq-4, which is 107,174,214). Including `colors.unixnames.txt`
 together with (colors.conf) will result in an error.
 
-## color lists
-
+### color lists
 A color list can be defined by specifying a comma-delimited list of existing
 colors
 
-    
-    
+```    
     red_list = dred,red,lred,vlred
-    
-
+```
 or, more conveniently, a regular expression. The results will be sorted by the
 value of any capture buffers. The order will be reasonable (numerically or
 alphanumerically depending on the value of the capture buffer). If you want to
@@ -513,23 +432,18 @@ sort the matches in reverse, wrap the regular expression in `rev(`).
 
 For example, to create a list of the 9-color spectral Brewer palette,
 
-    
-    
+```    
     spectral9 = spectral-9-div-(\d+)
-    
-
+```
 and to create a reversed list
 
-    
-    
+```    
     spectral9r = rev(spectral-9-div-(\d+))
-    
-
+```
 Color lists are used with [heat
 maps](/documentation/tutorials/lessons/2d_tracks/heat_maps/).
 
-### Brewer palette Lists
-
+#### Brewer palette Lists
 Lists for all [Brewer palettes](https://www.colorbrewer.org) are predefined
 (see `etc/brewer.lists.conf`). For a given color set `name-ncolors-type-
 index`, two lists are available
@@ -539,8 +453,7 @@ index`, two lists are available
 
 For example, the 6-color Brewer palette lists that are defined are
 
-    
-    
+```    
     # sequential
     blues-6-seq
     bugn-6-seq
@@ -581,8 +494,7 @@ For example, the 6-color Brewer palette lists that are defined are
     set1-6-qual
     set2-6-qual
     set3-6-qual
-    
-
+```
 Each has a `-rev` (reversed) counterpart (e.g. `spectral-6-div` and
 `spectral-6-div-rev`).
 
@@ -590,8 +502,7 @@ These lists are automatically imported from `etc/colors.brewer.lists.conf` via
 `etc/colors.brewer.conf`. Thus, if you import the Brewer colors (done by
 default), you are automatically including all Brewer lists.
 
-#### HSV color lists
-
+##### HSV color lists
 Brewer palettes provide sets of perceptually uniform colors and should be used
 whenever possible (i.e., _always_).
 
@@ -609,8 +520,7 @@ colors. For example, `hue-7` includes the colors `hue000`, `hue051`, `hue103`,
 `hue154`, `hue206`, `hue257`, and `hue309`. Lists for 3 to 30 colors are
 defined.
 
-#### color list cache
-
+##### color list cache
 Generating the color lists can take several seconds. For this reason, Circos
 employs a caching mechanism to store color lists definitions. By default, the
 cache file is `/tmp/circos.colorlist.dat`. If the cache is older than the
@@ -621,8 +531,7 @@ are trying to optimize image generation speed, and do not wish to count on
 caching, remove any list definitions you are not using and reduce the number
 of automatic transparency levels.
 
-## creating your own colors
-
+### creating your own colors
 I strongly suggest that you place new color definitions in a separate file.
 Modularity will make maintenance easier. And given that you'll likely want
 access to your custom colors for all images, include them globally rather than
@@ -630,16 +539,13 @@ on an image-by-image basis.
 
 For example, if you create your own blue
 
-    
-    
+```    
     # in mycolors.conf
     niceblue = 17,111,227
-    
-
+```
 you can include this file like this
 
-    
-    
+```    
     # all default color definitions
     <<include colors_fonts_patterns.conf>>
     
@@ -647,12 +553,10 @@ you can include this file like this
     <colors>
     <<include mycolors.conf>>
     </colors>
-    
-
+```
 You can quickly add colors directly
 
-    
-    
+```    
     # all default color definitions
     <<include colors_fonts_patterns.conf>>
     
@@ -661,5 +565,16 @@ You can quickly add colors directly
     <<include mycolors.conf>>
     niceblue2 = 37,101,179
     </colors>
-    
+```### images
+[Lesson](/documentation/tutorials/configuration/colors/lesson)
+[Images](/documentation/tutorials/configuration/colors/images)
 
+![Circos tutorial image -
+Colors](/documentation/tutorials/configuration/colors/img/image-01.png)
+![Circos tutorial image -
+Colors](/documentation/tutorials/configuration/colors/img/image-02.png)
+![Circos tutorial image -
+Colors](/documentation/tutorials/configuration/colors/img/image-03.png)
+### configuration
+[Lesson](/documentation/tutorials/configuration/colors/lesson)
+[Images](/documentation/tutorials/configuration/colors/images)

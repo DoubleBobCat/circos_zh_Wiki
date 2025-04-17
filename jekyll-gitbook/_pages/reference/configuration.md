@@ -3,37 +3,17 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: reference
-title: Reference
+title: Configuration Structure and Syntax
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 12 — Circos Reference
-
-## 4\. Configuration Parameters
-
-### syntax
-
+## Configuration Structure and Syntax
+### lesson
+#### syntax
 Below is a block template for a general configuration file. Not all blocks are
 required. For some, duplicate blocks will be merged (e.g. `<colors>`), while
 others will be stored as a list (e.g. `<tick>`).
 
-    
-    
+```    
     <colors>
     </colors>
     
@@ -175,15 +155,12 @@ others will be stored as a list (e.g. `<tick>`).
       ...
     
     </links>
-    
-
-### includes
-
+```
+#### includes
 A configuration file can be included in another with the `<<include FILE`>>
 directive.
 
-    
-    
+```    
     ################################################################
     # circos.conf
     <<include ideogram.conf>>
@@ -200,49 +177,38 @@ directive.
     <ticks>
      ...
     </ticks>
-    
-
+```
 When including the file, a relative file name will be interpreted relative to
 the location of the file in which it is being included. If it is not found
 there, the Circos distribution directory will be searched. For example,
 
-    
-    
+```    
     <<include etc/housekeeping.conf>>
-    
-
+```
 will include `etc/housekeeping.conf` from the Circos distribution.
 
-### parameters
-
+#### parameters
 Parameters are defined as variable/value pairs.
 
-    
-    
+```    
     param = value
-    
-
+```
 In some cases the parameter accepts a list (usually comma-delimited, but not
 always).
 
-    
-    
+```    
     param = value,value,...
-    
-
+```
 In a very few cases the parameter accepts multiple instances.
 
-    
-    
+```    
     radius = 0.9r
     radius = 0.8r
-    
-
+```
 If you attempt multiple definitions for a parameter that does not allow this,
 you'll see an error.
 
-#### units
-
+##### units
 Circos understands three units: `p` (pixel), `r` (relative) and `u`
 (chromosome units). Depending on a parameter, one or more of these units can
 be used. In some cases, in an arithmetic expression (e.g. `0.5r+10p`).
@@ -256,15 +222,13 @@ When this unit is used, the value is expressed as a multiple of
 `chromosomes_units`. This helps shorten values of parameters (e.g. `10u` vs
 `10000000`) such as `spacing` in `<tick>` blocks.
 
-#### references to other parameters
-
+##### references to other parameters
 Anywhere in the configuration file you can refer to the value of another
 parameter using the `conf()` function.
 
 To access configuration parameters from the root of the configuration file,
 
-    
-    
+```    
     show_histogram = yes
     ...
     <plots>
@@ -272,38 +236,32 @@ To access configuration parameters from the root of the configuration file,
       show = conf(show_histogram)
       type = histogram
       ...
-    
-
+```
 To access configuration parameters from anywhere in the configuration file,
 include the list of blocks before the parameter name.
 
-    
-    
+```    
     <plots>
      show_histogram = yes
      <plot>
       show = conf(plots,show_histogram)
       type = histogram
       ...
-    
-
+```
 To refer to a parameter in the current block and perform a search up the block
 hierarchy, specify "`.`" for the path.
 
-    
-    
+```    
     <plots>
      <plot>
       type = histogram
       r0   = 0.5r
       r1   = conf(.,r0)+50p
       ...
-    
-
+```
 The search is useful in rules
 
-    
-    
+```    
     <plots>
      <plot>
       x    = 10
@@ -315,75 +273,60 @@ The search is useful in rules
        # be found from the outer  block
        condition = conf(.,x) == 10
        ...
-    
-
-### accessing data properties
-
-###
-
+```
+#### accessing data properties
+####
 In rules, to access a data point's property, such as position or value, use
 `var()`.
 
-    
-    
+```    
     <rule>
     color = var(id)
-    
-
+```
 If you are using the value as a part of an expression, make sure you pass it
 through `eval()` (see below).
 
-### evaluating parameters
-
+#### evaluating parameters
 You can express a parameter using Perl code. Use `eval()` to make sure that it
 is evaluated. This is common in rules.
 
-    
-    
+```    
     <rule>
      condition = on(hs1)
      value     = eval(log(var(value))/log(2))
     </rule>
-    
-
+```
 The `condition` parameter in `<rule>` blocks is automatically evaluated.
 
-#### overriding values
-
+##### overriding values
 Generally most parameters do not accept multiple instances. The following is
 not allowed and will produce an error
 
-    
-    
+```    
     <ideogram>
     position = 0.9r
     position = 0.8r
     ...
     </ideogram>
-    
-
+```
 However, if you add the `*` suffix to one of the parameter names, it will be
 used to override the previously defined value of the parameter.
 
-    
-    
+```    
     <ideogram>
     position = 0.9r
     position* = 0.8r # this value will be used
     ...
     </ideogram>
-    
-
+```
 You can use as many `*` in the suffix as you want — the parameter with the
 largest number of `*` will be the one used. This facility is useful in
 overriding parameters from included files (see below).
 
-### block structure and merging
-
+#### block structure and merging
 Blocks logically group parameters and help name collisions.
 
-#### multiple blocks
-
+##### multiple blocks
 Certain blocks can have multiple instances, as indicated by the flags in the
 table below.
 
@@ -391,8 +334,7 @@ Some blocks define lists of objects, such as `<plot>` or `<tick>`. In these
 cases multiple entries will be stored as a list. In others, such as `<color>`,
 multiple instances will be merged into a single block.
 
-    
-    
+```    
     # two <color> blocks are ...
     <color>
     color1 = 255,100,100
@@ -407,15 +349,12 @@ multiple instances will be merged into a single block.
     color1 = 255,100,100
     color2 = 255,255,100
     </color>
-    
-
-#### merging and overriding
-
+```
+##### merging and overriding
 You can take advantage of merging by adding or overriding parameters in blocks
 which were included from another file.
 
-    
-    
+```    
     # default <colors> block with pre-defined colors
     <<include etc/colors_fonts_patterns.conf>>
     
@@ -424,12 +363,10 @@ which were included from another file.
     <colors>
     mycolor = 255,100,100
     </colors>
-    
-
+```
 When overriding parameters, use the `*` suffix.
 
-    
-    
+```    
     # suppose you are including your <ideogram> block from a file
     <<include ideogram.conf>>
     
@@ -438,15 +375,12 @@ When overriding parameters, use the `*` suffix.
     <ideogram>
     position* = 0.95r
     </ideogram>
-    
-
-### blocks
-
+```
+#### blocks
 Block flags: R required, M multiple blocks will be merged, + multiple blocks
 allowed.
 
-#### system
-
+##### system
 block
 
 inheritance
@@ -492,8 +426,7 @@ Include this using `etc/colors_fonts_patterns.conf`.
 
 * * *
 
-#### layout
-
+##### layout
 block
 
 inheritance
@@ -586,8 +519,7 @@ Region with magnified or condensed scale.
 
 * * *
 
-#### data tracks
-
+##### data tracks
 block
 
 inheritance
@@ -670,8 +602,7 @@ positions.
 
 * * *
 
-#### annotations and rules
-
+##### annotations and rules
 block
 
 inheritance
@@ -744,4 +675,5 @@ Track background, which is a colored region between axis ranges within the
 track.
 
   
-
+### images
+### configuration

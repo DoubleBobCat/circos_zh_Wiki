@@ -3,33 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: ticks_and_labels
-title: Tick Marks, Grids and Labels
+title: Tick Marks - Basics
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 5 — Tick Marks, Grids and Labels
-
-## 1\. Tick Marks - Basics
-
-[Lesson](/documentation/tutorials/ticks_and_labels/basics/lesson)
-[Images](/documentation/tutorials/ticks_and_labels/basics/images)
-[Configuration](/documentation/tutorials/ticks_and_labels/basics/configuration)
-
+## Tick Marks - Basics
+### lesson
 Ticks, tick labels and grids are defined in the <ticks> block, which can
 contain any number of <tick> blocks, each defining ticks with a different
 spacing.
@@ -46,24 +24,19 @@ I suggest that you keep your tick configuration in a separate configuration
 file, typically `ticks.conf`, which is imported into the main configuration
 using the `<<include ticks.conf>>` directive.
 
-    
-    
+```    
     # circos.conf
     <<include ticks.conf>>
     ...
-    
-
-### toggling tick display
-
+```
+#### toggling tick display
 Use `show_ticks` and `show_tick_labels` to control whether ticks and
 associated labels are drawn.
 
-    
-    
+```    
     show_ticks       = yes
     show_tick_labels = yes
-    
-
+```
 Tick labels are drawn only if ticks are drawn. Here, ticks refers to the
 radial lines that show progression of distance along the ideogram. Tick labels
 are the accompanying text elements that mark the position of the tick.
@@ -71,15 +44,12 @@ are the accompanying text elements that mark the position of the tick.
 If you have a large number of ticks (1000's) they can take a while to draw.
 You can skip ticks using `-noshow_ticks` flag on the command line.
 
-    
-    
+```    
     > bin/circos -noshow_ticks ...
-    
-
+```
 Similarly, you can supress labels with `-noshow_tick_labels`.
 
-### global and local tick parameters
-
+#### global and local tick parameters
 The <ticks> block contains global tick parameters and individual <tick> blocks
 that specify how ticks at a given spacing (absolute or relative) or at a
 specific position (or positions) should be formatted.
@@ -88,8 +58,7 @@ Global parameters influence every tick. They can be overridden with different
 values in individual <tick> blocks. The three basic tick parameters are the
 tick radius, label multiplier and orientation.
 
-    
-    
+```    
     <ticks>
     
       ... global tick parameters ...
@@ -104,10 +73,8 @@ tick radius, label multiplier and orientation.
       ...
     
     </ticks>
-    
-
-### tick radius, multiplier and orientation
-
+```
+#### tick radius, multiplier and orientation
 The radius specifies the radial position of the tick marks, which you
 generally want to set to the outer ideogram radius.
 
@@ -122,24 +89,20 @@ ticks at the outer ideogram radius, then an `out` orientation is appropriate.
 For ticks drawn at the inside radius, an `in` orientation should be used to
 avoid overlapping ticks and labels with the ideogram.
 
-    
-    
+```    
     radius               = dims(ideogram,radius_outer)
     label_multiplier     = 1e-6
     orientation          = out
-    
-
+```
 Note that for the radius, you can specify the radius by using the parsable
 `dims()` keyword. This keyword takes two arguments, feature and feature
 parameter. In this case, I've asked that the ticks be drawn at the outer
 radius of the ideogram. If you would like to shift the ticks away from this
 position, you can add a pixels offset. For example,
 
-    
-    
+```    
     radius               = dims(ideogram,radius_outer) + 25p
-    
-
+```
 would draw the the ticks at 25 pixels from the outer ideogram radius. This
 feature is useful if you'd like to draw data between the ideogram and the tick
 labels.
@@ -150,16 +113,13 @@ decouple the position of the tick from the position of the ideogram. This
 absolute placement is useful if you know you want the ticks at a specific
 image position, regardless of the position of the ideograms.
 
-    
-    
+```    
     radius               = dims(image,radius) - 25p
-    
-
+```
 As you'll see in other tutorials on ticks, you can specify multiple radius
 values for ticks. Doing so will create several rings of tick marks.
 
-### tick spacing
-
+#### tick spacing
 The location of ticks is controled by spacing (distance between adjacent ticks
 is fixed) or by specific position. Spacing can be either absolute (e.g. tick
 every 1Mb) or relative (tick every 1% of ideogram length).
@@ -177,8 +137,7 @@ the chromosomes_units parameter). In the definition below, if
 `chromosomes_units=10_000_000` then the ticks are spaced at 10Mb, 5Mb and 1Mb
 (10u, 5u and 1u).
 
-    
-    
+```    
     <ticks>
     
       radius               = dims(ideogram,radius_outer)
@@ -200,8 +159,7 @@ the chromosomes_units parameter). In the definition below, if
       </tick>
     
     </ticks>
-    
-
+```
 Tick marks are drawn in descending order of spacing. Therefore, for this
 example, the 10u ticks are drawn first, then all 5u ticks (except those
 already drawn every 10u) are drawn down, and then finally the 1u ticks. Unless
@@ -221,8 +179,7 @@ to set `chromosomes_units=1` and have a <tick> block with `spacing=1u` and
 then apply this to a human chromosome, in effect asking for a tick at every
 base (e.g. 250,000,000 ticks on chromosome 1).
 
-### tick parameters
-
+#### tick parameters
 The basic tick parameters are as follows. Note that most of the values require
 that a unit be provided (`p` = pixel, `r` = relative, `u` = chromosome unit).
 Other parameters, such as those that control relative spacing, are covered in
@@ -255,14 +212,12 @@ example, if you define all tick size values in relative terms, to maintain
 ticks of the same proportion you only need to change the ideogram thickness
 when the image size changes.
 
-### toggling tick display by ideogram
-
+#### toggling tick display by ideogram
 You can selectively suppress ticks for individual ideograms, or a range on any
 ideogram. There are two parameters in the <ticks> block, as well as in <tick>
 blocks, that control this.
 
-    
-    
+```    
     <ticks>
     # ticks will be displayed on every ideogram by default
     chromosomes_display_default = yes
@@ -272,15 +227,13 @@ blocks, that control this.
     chromosomes = -hs1;-hs2:0-50;-hs3:100-)
     ...
     </ticks>
-    
-
+```
 An example of this kind of tick mark suppression is shown in the first image
 in this tutorial. You can individually suppress individual ticks by adding a
 chromosomes parameter to the <tick> block. For example, to remove 10Mb tick
 marks from hs2
 
-    
-    
+```    
     <ticks>
     chromosomes_display_default = yes
     chromosomes = -hs1;-hs2:0-100;-hs3:100-)
@@ -293,8 +246,7 @@ marks from hs2
     
     ...
     </ticks>
-    
-
+```
 When defining regions in which tick marks are not shown (these are entries
 prefixed by `-` such as `-hs1`), the regions in the <ticks> block combine with
 regions in the <tick> blocks in the OR sense (as sets, the union is computed).
@@ -309,8 +261,7 @@ these definitions can contain regions of exclusion.
 
 To show ticks only on specific ideograms or regions,
 
-    
-    
+```    
     <ticks>
     # ticks will not be displayed on every ideogram by default
     chromosomes_display_default = no
@@ -318,14 +269,12 @@ To show ticks only on specific ideograms or regions,
     chromosomes = hs1;hs2:0-100;hs3:100-)
     ...
     </ticks>
-    
-
+```
 You can combine regions where tick marks should be shown with regions of
 exclusion within individual <tick> blocks to specifically control where ticks
 are drawn.
 
-    
-    
+```    
     <ticks>
     # ticks will not be displayed on every ideogram by default
     chromosomes_display_default = no
@@ -343,5 +292,157 @@ are drawn.
     </tick>
     
     </ticks>
+```### images
+![Circos tutorial image - Tick Marks -
+Basics](/documentation/tutorials/ticks_and_labels/basics/img/01.png) ![Circos
+tutorial image - Tick Marks -
+Basics](/documentation/tutorials/ticks_and_labels/basics/img/02.png) ![Circos
+tutorial image - Tick Marks -
+Basics](/documentation/tutorials/ticks_and_labels/basics/img/03.png) ![Circos
+tutorial image - Tick Marks -
+Basics](/documentation/tutorials/ticks_and_labels/basics/img/04.png) ![Circos
+tutorial image - Tick Marks -
+Basics](/documentation/tutorials/ticks_and_labels/basics/img/05.png)
+### configuration
+#### circos.conf
+```    
+    <<include etc/colors_fonts_patterns.conf>>
     
+    <<include ideogram.conf>>
+    <<include ticks.conf>>
+    
+    <image>
+    <<include etc/image.conf>>
+    </image>
+    
+    karyotype   = data/karyotype/karyotype.human.txt
+    
+    chromosomes_units           = 1000000
+    chromosomes_display_default = no
+    chromosomes                 = hs1;hs2;hs3;hs4;hs5
+    
+    <<include etc/housekeeping.conf>>
+```
+  
 
+* * *
+
+#### bands.conf
+```    
+    show_bands            = no
+    fill_bands            = yes
+    band_stroke_thickness = 2
+    band_stroke_color     = white
+    band_transparency     = 0
+```
+  
+
+* * *
+
+#### ideogram.conf
+```    
+    <ideogram>
+    
+    <spacing>
+    default = 0.01r
+    break   = 2u
+    </spacing>
+    
+    <<include ideogram.position.conf>>
+    <<include ideogram.label.conf>>
+    <<include bands.conf>>
+    
+    </ideogram>
+``````
+  
+
+* * *
+
+#### ideogram.label.conf
+```    
+    show_label     = yes
+    label_font     = default
+    label_radius   = (dims(ideogram,radius_inner) + dims(ideogram,radius_outer))/2
+    label_center   = yes
+    label_size     = 72
+    label_with_tag = yes
+    label_parallel = yes
+    label_case     = upper
+```
+  
+
+* * *
+
+#### ideogram.position.conf
+```    
+    radius           = 0.90r
+    thickness        = 100p
+    fill             = no
+    fill_color       = black
+    stroke_thickness = 2
+    stroke_color     = black
+```
+  
+
+* * *
+
+#### ticks.conf
+```    
+    show_ticks          = yes
+    show_tick_labels    = yes
+    
+    <ticks>
+    
+    #chromosomes_display_default = yes
+    chromosomes_display_default = no
+    
+    # no ticks on chromosomes hs1 and hs2
+    # use with chromosomes_display_default = yes
+    # chromosomes = -hs1;-hs2:0-100;-hs3:100-)
+    
+    chromosomes          = hs1;hs2:0-100;hs3:100-)
+    
+    radius               = dims(ideogram,radius_outer)
+    label_offset         = 5p
+    orientation          = out
+    label_multiplier     = 1e-6
+    color                = black
+    
+    <tick>
+    #chromosomes    = -hs2
+    spacing        = 1u
+    size           = 8p
+    thickness      = 2p
+    color          = dgrey
+    show_label     = no
+    </tick>
+    
+    <tick>
+    chromosomes    = hs4
+    spacing        = 5u
+    size           = 12p
+    color          = dred
+    thickness      = 2p
+    show_label     = yes
+    label_size     = 20p
+    label_color    = dred
+    label_offset   = 3p
+    format         = %d
+    </tick>
+    
+    <tick>
+    chromosomes    = -hs2;hs5
+    spacing        = 10u
+    size           = 14p
+    thickness      = 2p
+    show_label     = yes
+    label_size     = 24p
+    label_offset   = 5p
+    format         = %d
+    </tick>
+    
+    </ticks>
+```
+  
+
+* * *

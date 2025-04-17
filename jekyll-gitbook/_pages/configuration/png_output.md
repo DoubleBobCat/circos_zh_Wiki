@@ -3,50 +3,25 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: PNG Output
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 10\. PNG Output
-
-[Lesson](/documentation/tutorials/configuration/png_output/lesson)
-[Images](/documentation/tutorials/configuration/png_output/images)
-[Configuration](/documentation/tutorials/configuration/png_output/configuration)
-
+## PNG Output
+### lesson
 Circos is capable of producing both PNG (24-bit) and
 [SVG](/documentation/tutorials/configuration/svg_output) images. This section
 discusses PNG files, as well as the <image> block which controls the location,
 size and other characteristics of the output file.
 
-### <image> block
-
+#### <image> block
 I suggest that you always import the default image settings.
 
-    
-    
+```    
     <image>
     # import defaults from Circos distribution
     <<include etc/image.conf>>
     </image>
-    
-
+```
 The settings define the output file to be 3,000 x 3,000 pixels, with white
 background, named `circos.png`, which will be placed in the current directory.
 
@@ -55,8 +30,7 @@ parameter definitions. You'll find that this file is actually composed of two
 additional includes, a practise common in Circos to try to modularize
 configuration as much as possible.
 
-    
-    
+```    
     # etc/image.conf
     <<include image.generic.conf>>
     <<include background.white.conf>>
@@ -74,42 +48,35 @@ configuration as much as possible.
     
     # background.white.conf
     background         = white
-    
-
+```
 If you would like to overwrite any of these parameters, use the `*` suffix
 syntax.
 
-    
-    
+```    
     # circos.conf
     <image>
     <<include etc/image.conf>>
     file*   = myfile.png
     radius* = 1000p
     </image>
-    
-
-### 24-bit images
-
+```
+#### 24-bit images
 PNG files are created in 24-bit mode. The `24bit` flag previously found in the
 <image> block has been deprecated.
 
-### image size
-
+#### image size
 Output image directory and filename are defined in the `dir` and `file`
 parameters of the <image> block. The produced image is always square, and its
 size set by the `radius` parameter (this is the size of the inscribed circle).
 If `radius=1500p`, then the image will be 3,000 x 3,000 pixels in size.
 
-### image background
-
+#### image background
 Image background is controlled using the `background` parameter, which may be
 set to `transparent` or an image location. For more details, see the [Image
 Transparency
 Tutorial](/documentation/tutorials/recipes/transparency_background/)
 
-### angle offset
-
+#### angle offset
 You can adjust the angle offset of the circular layout using the
 `angle_offset` parameter. The value of this parameter determines where the
 start of the first ideogram appears. By default, the value is set to
@@ -120,14 +87,12 @@ because it will maintain legibility of all all text labels, which will be
 oriented right-side-up. If you rotate the image yourself, some labels may be
 upside-down.
 
-### scale orientation
-
+#### scale orientation
 You can orient all the ideogram directions to point counterclockwise by
 setting `angle_orientation=counterclockwise`. By default, everything is
 oriented `clockwise`.
 
-### PNG dpi image resolution
-
+#### PNG dpi image resolution
 There's often confusion about what "dpi" means—I hope to clear this up here.
 
 The default settings in Circos generate PNG images at 3,000 x 3,000 pixels,
@@ -154,11 +119,9 @@ Nature's two-column figure is 7.2" wide (183 mm) as described in their
 achieve 300 dpi resolution (at least 300 pixels per inch of figure), you'll
 need a figure that is
 
-    
-    
+```    
     300 * 7.2 = 2,160 pixels
-    
-
+```
 in each dimension. The default Circos 3,000 x 3,000 pixel output is sufficient
 (it is 417 dpi if the output is 7.2").
 
@@ -167,23 +130,19 @@ pixel size of the image. Match this to the size of the physical image in the
 journal. It usually doesn't hurt to have an image that exceeds the minimum
 resolution.
 
-### Limitations in PNG output
-
+#### Limitations in PNG output
 If you susspect there may be a problem with drawing images, please run
 
-    
-    
+```    
     bin/gddiag
-    
-
+```
 and look at the output `gddiag.png`. It should look like the second image in
 this tutorial.
 
 Circos uses perl's GD module to draw its graphics, which in turn depends on
 the [gd library](https://www.libgd.org) for its core implementation.
 
-### anti-aliasing bug in `libgd`
-
+#### anti-aliasing bug in `libgd`
 If you find artefacts in your image (e.g. squares or elements in unexpected
 places), it is likely that your libgd is one of the versions which has an
 anti-aliasing bug. Please turn anti-aliasing off by toggling the
@@ -192,23 +151,18 @@ anti-aliasing bug. Please turn anti-aliasing off by toggling the
 You can overwrite this parameter in `circos.conf`, right after importing
 `etc/housekeeping`,
 
-    
-    
+```    
     # in circos.conf
     <<include etc/housekeeping.conf>>
     anti_aliasing* = no
-    
-
+```
 or change it permanently in `etc/housekeeping.conf`,
 
-    
-    
+```    
     # etc/housekeeping.conf
     anti_aliasing = no
-    
-
-### other anti-aliasing limitations
-
+```
+#### other anti-aliasing limitations
 As of libgd 2.0.35, antialiasing for lines is not supported when the line is
 drawn at a thickness >1 or with a color that has an alpha channel. The
 consequence is that you cannot have thick antialiased lines, or partially
@@ -220,4 +174,25 @@ manipulation tool like
 [ImageMagick's](https://www.imagemagick.org/script/index.php) convert to
 shrink the image back to its desired size. The process of resizing the image
 will subsample the pixels and give the effect of antialiasing.
+### images
+![Circos tutorial image - PNG
+Output](/documentation/tutorials/configuration/png_output/img/image-01.png)
+### configuration
+#### circos.conf
+```    
+    <image>
+    
+    ...
+    
+    # png on
+    png = yes
+    # svg off
+    svg = no
+    
+    ...
+    
+    </image>
+``````
+  
 
+* * *

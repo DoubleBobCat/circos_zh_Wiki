@@ -3,34 +3,15 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: utilities
-title: Helper Tools
+title: Visualizing Tabular Data
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 10 — Helper Tools
-
-## 5\. Visualizing Tabular Data
-
+## Visualizing Tabular Data
+### lesson
 [Lesson](/documentation/tutorials/utilities/visualizing_tables/lesson)
 [Images](/documentation/tutorials/utilities/visualizing_tables/images)
 
-## motivation
-
+### motivation
 For details about the methodology behind the use of Circos to visualize
 tabular data, see the article [Visualizing Tabular
 Data](/presentations/articles/vis_tables1).
@@ -39,17 +20,12 @@ For an in-depth description of the configuration syntax for tableviewer script
 set, see [Visualizing Tabular Data - Part
 II](/presentations/articles/vis_tables2).
 
-## script location
-
-    
-    
+### script location
+```    
     tools/tableviewer
-    
-
-## script usage
-
-    
-    
+```
+### script usage
+```    
     > cd tools/tableviewer
     # create an image of a basic sample table
     > ./makeimage-basic
@@ -57,8 +33,7 @@ II](/presentations/articles/vis_tables2).
     > ./makeimage-ordered
     # create an image of a sample table with row/col order an color information
     > ./makeimage-ordered-colored
-    
-
+```
 The tableviewer is composed of three parts
 
   * make-table - creates a random table (helpful for debugging and exploration) 
@@ -67,18 +42,15 @@ The tableviewer is composed of three parts
 
 To get the full manpage, use -man.
 
-    
-    
+```    
     > cd tools/tableviewer
     > bin/make-table -man
     > bin/parse-table -man
     > bin/make-conf -man
-    
-
+```
 Adjust the configuration files in etc/ to suit your needs.
 
-## details
-
+### details
 The scripts in tableviewer/ (make-table, parse-table, make-conf) generate a
 Circos image of tabular data. For more information about how tabular data is
 represented, see the [online tableviewer](https://mk.bcgsc.ca/tableviewer).
@@ -91,24 +63,20 @@ There are three scripts that compose the tableviewer package
   * parse-table - Parses a table file (your own or generated with make-table) and generates a parsed data stream that is used by make-conf 
   * make-conf - Uses output of parse-table to create data files and configuration files used by Circos to visualize the table 
 
-### make-table
-
+#### make-table
 This script is helpful to generate random data to test-drive the rest of the
 tableviewer package. For example, you can generate a small table
 
-    
-    
+```    
     > bin/make-table -row 3 -brief
      lbl    A    B    C
        A   80  387  112
        B    1   30   61
        C   96  146   29
-    
-
+```
 or a large one
 
-    
-    
+```    
     > bin/make-table -row 15 -brief
      lbl    A    B    C    D    E    F    G    H    I    J    K    L    M    N    O
        A  376   78  367   75   72  184  452  285  310  142  469  215  107  106   95
@@ -126,23 +94,20 @@ or a large one
        M   93   73   60  226   59   55  140  124  210  136   59   79   80  106  204
        N  143  150   92   67   94  239   48  125  214  119   84   76  121   72   92
        O  134  122   83  223  101   74  161  155  151  159  183  154   15   48  145
-    
-
+```
 You can use -row and -col to independently set the number of rows and columns
 in the table.
 
 By using -unique, you can request that row and column labels are all
 different.
 
-    
-    
+```    
     > bin/make-table -row 3 -brief -uniq
      lbl    D    E    F
        A  288   40  245
        B   52   52   33
        C  139   76   85
-    
-
+```
 Uniquely labeled rows and columns generate an image in which each row and
 column has its own segment, since segments are keyed by label. If your table
 represents relationships between a set of items, then row/column labels will
@@ -156,8 +121,7 @@ using parse-table (see below), you should always set strip_leading_space=yes
 (this is the default) in parse-table.conf so that any leading space in lines
 is removed.
 
-### parse-table
-
+#### parse-table
 This script parses the table file and generates row, column, and cell
 statistics and data values that are subsequently used to create configuration
 and input files using make-conf.
@@ -178,33 +142,44 @@ determined (based on label value or row/column size).
 To help you experiment, you should construct two simple tables using the make-
 table tool - one with unique labels and one with shared column/row labels
 
-    
-    
+```    
     > bin/make-table -rows 5 -seed 123 -brief -uniq  > samples/table-basic-unique.txt
     > bin/make-table -rows 5 -seed 123 -brief        > samples/table-basic-shared.txt
-    
-
+```
 and then play with parse-table.conf settings as you draw each table
 
-    
-    
+```    
     cat samples/table-unique.txt | bin/parse-table | bin/make-conf -dir data/
     ../../bin/circos -conf etc/circos.conf
-    
-
+```
 Take a look at the example images associated with this tutorial to get a
 feeling for the kind of variety that is possible.
 
-### make-conf
-
+#### make-conf
 The only option to make-conf is the directory to which it should write the
 data files.
 
-    
-    
+```    
     > cat samples/table-basic.txt | bin/parse-table | bin/make-conf **-dir data/**
-    
-
+```
 Make sure that paths in the etc/circos.conf file correctly reflect the
 location to which the data files were written.
+### images
+[Lesson](/documentation/tutorials/utilities/visualizing_tables/lesson)
+[Images](/documentation/tutorials/utilities/visualizing_tables/images)
 
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/01.png)
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/02.png)
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/03.png)
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/04.png)
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/05.png)
+![Circos tutorial image - Visualizing Tabular
+Data](/documentation/tutorials/utilities/visualizing_tables/img/06.png)
+### configuration
+[Lesson](/documentation/tutorials/utilities/visualizing_tables/lesson)
+[Images](/documentation/tutorials/utilities/visualizing_tables/images)

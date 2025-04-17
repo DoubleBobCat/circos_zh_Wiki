@@ -3,33 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: recipes
-title: Recipes
+title: Cortical Maps—Connectograms
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 9 — Recipes
-
-## 19\. Cortical Maps
-
-[Lesson](/documentation/tutorials/recipes/cortical_maps/lesson)
-[Images](/documentation/tutorials/recipes/cortical_maps/images)
-[Configuration](/documentation/tutorials/recipes/cortical_maps/configuration)
-
+## Cortical Maps—Connectograms
+### lesson
 In this example I will show you how to create maps of the brain connectome
 using Circos — a _connectogram_. Images of this type have recently appeared in
 papers from the [Van Horn group at UCLA](https://ccb.loni.ucla.edu/about/ccb-
@@ -53,8 +31,7 @@ Phineas Gage in his traumatic brain
 injury](https://www.guardian.co.uk/science/neurophilosophy/2012/may/16/neuroscience-
 psychology).
 
-### the connectogram
-
+#### the connectogram
 The connectogram shows regions of the brain, their physical properties and
 connectivity.
 
@@ -78,22 +55,19 @@ Within the center of the connectogram are the observed connections between
 parcelations, measured _in vivo_ ([Human Connectome Project
 (HCP)](https://www.humanconnectomeproject.org/)).
 
-### data input
-
+#### data input
 This tutorial includes a script, `parsemap` (see `tutorials/8/19` directory),
 which generates the data files to create a connectogram. This script requires
 the list of parcelations and, optionally, a list of connections between them.
 
-#### list of parcelations
-
+##### list of parcelations
 This file defines the parcelation region lobe and name, color, (`r g b`), and
 measures, `z1...z5`. You'll find an example in `map.txt`. For this example,
 the measures data is random and the measures do not correspond to any specific
 property. The lobe, parcelation codes and colors are taken from [Irimia et al,
 2012](https://www.frontiersin.org/Journal/Abstract.aspx?s=772&name=neurotrauma&ART_DOI=10.3389/fneur.2012.00010).
 
-    
-    
+```    
     # lobe parcelation r g b z1 z2 z3 z4 z5
     Fro TrFPoG/S 255 153 153 0.910094 0.265257 0.893188 0.220351 0.810623
     Fro FMarG/S 204 0 51 0.631798 0.571077 0.332158 0.104455 0.173531
@@ -107,8 +81,7 @@ property. The lobe, parcelation codes and colors are taken from [Irimia et al,
     Lim MACgG/S 255 240 191 0.336171 0.570686 0.437 0.87439 0.899756
     Lim SbCaG 255 153 200 0.643938 0.517941 0.894874 0.839202 0.77888
     ...
-    
-
+```
 The `parsemap` script uses the order of the parcelations in the file to
 determine their order in the image.
 
@@ -116,32 +89,27 @@ This example uses 5 measures for each parcelation, but the `parsemap` script
 will work if you don't have any measures and are only drawing links between
 regions.
 
-    
-    
+```    
     # lobe parcelation r g b
     Fro TrFPoG/S 255 153 153
     Fro FMarG/S 204 0 51
     Fro MFS 255 153 51
     ...
-    
-
+```
 In this case, you'll need to adjust `etc/circos.conf` and remove mention of
 the heatmaps.
 
-#### list of connections
-
+##### list of connections
 The second file is the **list of connections** (see `map.links.txt`), which
 looks like
 
-    
-    
+```    
     # hemisphere parcelation hemisphere parcelation connection_type connection_score
     r InfFGOrp l PosCS 1 0.0229917613607071
     l BSt l SbOrS 1 0.213414893099078
     l TPl r Pu 0 0.26688626172767
     ...
-    
-
+```
 The connection type and score do not corespond to any specifc property. I have
 included them here to show you how to use rules in the Circos configuration
 file to change the way the connection links are drawn.
@@ -151,14 +119,11 @@ Replace these two files with your data.
 You can move the `parsemap` script to another location on your filesystem
 (e.g. `/usr/local/bin`) if you plan on using it for other images.
 
-    
-    
+```    
     > cd /path/to/image
     > /usr/local/bin/parsemap -map map.txt -links map.links.txt
-    
-
-### Circos data files
-
+```
+#### Circos data files
 The `parsemap` script generates the data files that are required to create the
 image.
 
@@ -166,8 +131,7 @@ To create the data files, run the `parsemap` script ([Windows users should
 read this tutorial
 first](documentation/tutorials/configuration/unix_vs_windows/))
 
-    
-    
+```    
     # create the configuration and data files
     > ./parsemap -map map.txt -links map.links.txt -debug
     ...
@@ -181,20 +145,17 @@ first](documentation/tutorials/configuration/unix_vs_windows/))
     debug[1] wrote file data/measure.3.txt
     debug[1] wrote file data/measure.4.txt
     debug[1] wrote file data/links.txt
-    
-
+```
 You'll need to supply the remaining configuration files that define how the
 image is organized — sample configuration can be found in `etc/`. These are
 `etc/circos.conf`, `etc/ideogram*conf`, `etc/ticks*conf` and `etc/bands.conf`.
 
-#### parcelation color
-
+##### parcelation color
 The RGB colors for each parcelation were taken from Appendix 1 in [Irimia et
 al,
 2012](https://www.frontiersin.org/Journal/Abstract.aspx?s=772&name=neurotrauma&ART_DOI=10.3389/fneur.2012.00010).
 
-    
-    
+```    
     # etc/color.brain.conf
     trfpogs = 255,153,153
     fmargs = 204,0,51
@@ -204,13 +165,11 @@ al,
     ors = 255,204,204
     rg = 255,204,153
     ...
-    
-
+```
 The colors are named after the parcelations, in lowercase form and without any
 non-word characters (e.g. `IntPS/TrPS` becomes `intpstrps`).
 
-#### lobe/parcelation axis
-
+##### lobe/parcelation axis
 The lobe and segment definitions are stored in the `data/segments.txt` file.
 
 Here, you'll have to remember that Circos was originally designed to display
@@ -221,8 +180,7 @@ bands, which are visual features on chromosomes.
 Each lobe gets a separate entry for the left and right hemisphere. Its size is
 determined by the number of parcelations, arbitrary sized at 100.
 
-    
-    
+```    
     # left frontal lobe (fro-l)
     chr - fro-l Fro 0 2099 black
     # right frontal lobe (fro-r)
@@ -232,8 +190,7 @@ determined by the number of parcelations, arbitrary sized at 100.
     # right insula (ins-r)
     chr - ins-r Ins 0 799 black
     ...
-    
-
+```
 The `fro-l` field is the name of the Circos axis that corresponds to the lobe
 and `Fro` is its label. The last field is the color of the lobe, but we will
 not be using this because the lobe will be covered with colored parcelations.
@@ -245,8 +202,7 @@ parcelation, which was previously defined in `etc/color.brain.conf`. The 3rd
 and 4th fields in a `band` definition are currently not being used by Circos
 (they exist for legacy reasons).
 
-    
-    
+```    
     band fro-l TrFPoG/S TrFPoG/S 0 99 trfpogs
     band fro-l FMarG/S FMarG/S 100 199 fmargs
     ...
@@ -258,32 +214,26 @@ and 4th fields in a `band` definition are currently not being used by Circos
     band lim-l MACgG/S MACgG/S 100 199 macggs
     band lim-l SbCaG SbCaG 200 299 sbcag
     ...
-    
-
+```
 It's important to note that the parcelations, defined as bands, are not
 directly referenced when plotting data. They are properties of the axis — they
 are not used to identify positions. See the section on parcelation labels and
 measures below for an explanation.
 
-#### lobe order
-
+##### lobe order
 Once the lobes are defined, their order in the figure is determined by the
 `chromosomes_order` field. Again, the genomic origins of Circos show through.
 
-    
-    
+```    
     chromosomes_order = fro-r,ins-r,lim-r,tem-r,par-r,occ-r,sbc-r,ceb-r,bst,ceb-l,sbc-l,occ-l,par-l,tem-l,lim-l,ins-l,fro-l
-    
-
+```
 By design, the brain stem lobe (bst) does not have a left and right version.
 
-#### parcelation labels
-
+##### parcelation labels
 Text labeling each parcelation is drawn as a text track. The input data for
 this is `data/structure.label.txt`,
 
-    
-    
+```    
     fro-l 0 99 TrFPoG/S
     fro-l 100 199 FMarG/S
     fro-l 200 299 MFS
@@ -296,8 +246,7 @@ this is `data/structure.label.txt`,
     lim-l 100 199 MACgG/S
     lim-l 200 299 SbCaG
     ...
-    
-
+```
 The text track stores the name of the parcelation region _independently_ of
 the parcelation definitions, which was stored as bands entries. Circos
 currently does not support showing the names of the bands directly — you need
@@ -317,12 +266,10 @@ structures (e.g. lobes). By making each axis a lobe, and dividing it into
 regions, we can later write rules that check whether a data point lies on a
 specific lobe.
 
-#### parcelation measures heat maps
-
+##### parcelation measures heat maps
 The measures for each parcelation are defined in `data/measure.*.txt`
 
-    
-    
+```    
     fro-l 0 99 0.910094
     fro-l 100 199 0.631798
     fro-l 200 299 0.502931
@@ -334,32 +281,26 @@ The measures for each parcelation are defined in `data/measure.*.txt`
     lim-l 0 99 0.399686
     lim-l 100 199 0.336171
     lim-l 200 299 0.643938
-    
-
-#### links
-
+```
+##### links
 Links are stored as connected pair of axis and coordinates.
 
-    
-    
+```    
     fro-r 700 799 par-l 300 399 type=1,score=0.022992
     bst 0 99 fro-l 400 499 type=1,score=0.213415
     tem-l 700 799 sbc-r 0 99 type=0,score=0.266886
     ...
-    
-
+```
 The `type` and `score` parameters annotate each link and can be referenced in
 rules to change the format of the link.
 
-### Circos configuration files
-
+#### Circos configuration files
 The main configuration file is `etc/circos.conf`. This file contains all of
 the parameters that define the position and content of elements in the image,
 such as axis position and data tracks. Using <<include ...>> directives in
 this file, content from other files can be imported.
 
-#### ideogram layout
-
+##### ideogram layout
 The axis segments (here, brain lobes) are called _ideograms_ in Circos. This
 vocabular is derived from the term given to a graphical representation of a
 chromosome.
@@ -368,16 +309,13 @@ The position, thickness and spacing of lobe ideograms is defined in
 `etc/ideogram.conf`, which is imported using the <<include ideogram.conf>>
 directive.
 
-    
-    
+```    
     # circos.conf
     <<include ideogram.conf>>
-    
-
+```
 The `etc/ideogram.conf` file is
 
-    
-    
+```    
     # ideogram.conf
     <ideogram>
     
@@ -401,15 +339,13 @@ The `etc/ideogram.conf` file is
     <<include bands>>
     
     </ideogram>
-    
-
+```
 The position and thickness of the lobe segments is imported from the
 `etc/ideogram.position.conf` file. Storing parameters in multiple files makes
 the configuration more modular and allows you to reuse components of one
 figure in another.
 
-    
-    
+```    
     # ideogram.position.conf
     
     # position of the lobe axis segments, relative to radius of image
@@ -425,13 +361,11 @@ figure in another.
     # the segments have a 1 pixel outline
     stroke_thickness = 1
     stroke_color     = black
-    
-
+```
 The position and format of labels for each lobe segment are specified in
 `etc/ideogram.label.conf`.
 
-    
-    
+```    
     # ideogram.label.conf
     
     show_label       = yes
@@ -447,13 +381,11 @@ The position and format of labels for each lobe segment are specified in
     
     # force upper case for labels
     label_case       = upper
-    
-
+```
 Recall that the parcelation regions were defined as bands in the
 `data/segments.txt` file. Here I toggle the display of the bands.
 
-    
-    
+```    
     # bands.conf
     
     show_bands            = yes
@@ -469,18 +401,14 @@ Recall that the parcelation regions were defined as bands in the
     # 1 - least transparent
     # 5 - most transparent
     band_transparency     = 0
-    
-
+```
 The axis progression of left hemisphere lobes is reversed, using a regular
 expression that selects all lobes whose names contain `-l`.
 
-    
-    
+```    
     chromosomes_reverse = /.*-l/
-    
-
-#### ticks
-
+```
+##### ticks
 The image contains a tick in the center of each paracelation region, together
 with a grid line that extends inward to the start of links. This is achieved
 with parameters defined in `etc/ticks.conf`.
@@ -492,19 +420,16 @@ not be possible to specify a position in the middle of the region.
 
 We also define the `chromosomes_units` to be 100
 
-    
-    
+```    
     chromosomes_units = 100
     <<include ticks.conf>>
-    
-
+```
 so that we can use this value as a short cut when defining ticks.
 
 Two groups of ticks are defined, spaced every `1u` (100) and every `0.5u`
 (50).
 
-    
-    
+```    
     # ticks.conf
     
     show_ticks          = yes
@@ -542,14 +467,11 @@ Two groups of ticks are defined, spaced every `1u` (100) and every `0.5u`
     </tick>
     
     </ticks>
-    
-
-#### parcelation labels
-
+```
+##### parcelation labels
 The parcelation labels are displayed as a text track.
 
-    
-    
+```    
     <plot>
     type       = text
     file       = data/structure.label.txt
@@ -560,10 +482,8 @@ The parcelation labels are displayed as a text track.
     r1         = 1.5r
     rpadding   = 10p
     </plot>
-    
-
-#### parcelation heat maps
-
+```
+##### parcelation heat maps
 Each parcelation has five properties, each displayed as a heat map. The heat
 maps are similarly formatted and are therefore patterened after a template.
 While it's not required that you use a template in this case, it makes
@@ -575,8 +495,7 @@ variables whose values change in each <plot> block.
 
 The heatmap template looks like this
 
-    
-    
+```    
     # heatmap.conf
     <plot>
     type         = heatmap
@@ -598,12 +517,10 @@ The heatmap template looks like this
     stroke_color = white
     stroke_thickness = 3
     </plot>
-    
-
+```
 and is used in `etc/circos.conf` like this
 
-    
-    
+```    
     # define parameters used in the heatmap template
     hm_r      = 0.96  # radial position of first heat map
     hm_w      = 0.025 # heat map width
@@ -621,14 +538,11 @@ and is used in `etc/circos.conf` like this
     <<include heatmap.conf>>
     <<include heatmap.conf>>
     <<include heatmap.conf>>
-    
-
-#### connectogram links
-
+```
+##### connectogram links
 Links are defined in a <link> block.
 
-    
-    
+```    
     <links>
     <link>
     file   = data/links.txt
@@ -641,8 +555,7 @@ Links are defined in a <link> block.
     color         = black
     </link>
     </links>
-    
-
+```
 The `radius` parameter defines the radial position of the link ends, while the
 `bezier_radius` defines the radial position of the control point used to draw
 the curve.
@@ -651,8 +564,7 @@ The ancillary parameters, `crest` and `bezier_radius_purity`, affect the angle
 at which the links terminate and the control point radius for short links,
 respectively.
 
-#### link rules
-
+##### link rules
 Recall that the link input data included two parameters, `type` and `score`.
 We can use <rule> blocks to change how the links are formatted based on these
 parameters.
@@ -660,8 +572,7 @@ parameters.
 Parameter values are referenced using `var()` and format values can be
 expressed as Perl code when passed through `eval()`.
 
-    
-    
+```    
     <rules>
     
     <rule>
@@ -689,19 +600,15 @@ expressed as Perl code when passed through `eval()`.
     </rule>
     
     </rules>
-    
-
-### variants
-
+```
+#### variants
 I've generated a couple of layout variants for the connectogram (see
 [images](images)) to give you an idea of other layouts.
 
-#### outward links for intra-lobe connections
-
+##### outward links for intra-lobe connections
 Link geometry can be changed with rules.
 
-    
-    
+```    
     <link>
     ...
     # all links terminate further inward
@@ -719,49 +626,40 @@ Link geometry can be changed with rules.
     flow      = continue
     </rule>
     ...
-    
-
-#### focus on parcelation
-
+```
+##### focus on parcelation
 The second variant (see `etc.2/` directory in this tutorial) has adjusted
 geometry to make the parcelation segments more central in the image. To do
 this, the ideogram radius is reduced
 
-    
-    
+```    
     # ideogram.position.conf
     radius = 0.65r
-    
-
+```
 Inter-lobe links point inward and terminate at the inner radius of the
 parcelation regions. Intra-lobe links point outward, and terminate at the
 outer radius.
 
-    
-    
+```    
     <rule>
     condition = var(chr1) eq var(chr2)
     bezier_radius = 1.25r
     radius    = dims(ideogram,radius_outer)
     flow      = continue
     </rule>
-    
-
+```
 The heatmaps, being an annotation of the parcelation regions, are moved
 further out together with labels.
 
-    
-    
+```    
     # circos.conf
     ...
     hm_r      = 1.3
-    
-
+```
 The tick grid that connects the parcelation labels with segments is made
 lighter, to avoid interference with outward links.
 
-    
-    
+```    
     # ticks.conf
     
     <ticks>
@@ -772,5 +670,341 @@ lighter, to avoid interference with outward links.
     </tick>
     
     </ticks>
+```### images
+![Circos tutorial image - Cortical
+Maps—Connectograms](/documentation/tutorials/recipes/cortical_maps/img/00.png)
+![Circos tutorial image - Cortical
+Maps—Connectograms](/documentation/tutorials/recipes/cortical_maps/img/01.png)
+![Circos tutorial image - Cortical
+Maps—Connectograms](/documentation/tutorials/recipes/cortical_maps/img/02.png)
+![Circos tutorial image - Cortical
+Maps—Connectograms](/documentation/tutorials/recipes/cortical_maps/img/03.png)
+![Circos tutorial image - Cortical
+Maps—Connectograms](/documentation/tutorials/recipes/cortical_maps/img/04.png)
+### configuration
+#### circos.conf
+```    
+    <<include ideogram.conf>>
     
+    chromosomes_units = 100
+    <<include ticks.conf>>
+    
+    <image>
+    angle_offset* = -87
+    <<include etc/image.conf>>
+    </image>
+    
+    ### single genomes
+    
+    karyotype = data/segments.txt
+    
+    <<include segment.order.conf>>
+    
+    chromosomes_reverse = /.*-l/
+    
+    ###
+    # HEATMAPS
+    # If you aren't using heatmaps in your image (you have no measures associated with
+    # parcelation regions), remove this section. Also turn of grids in etc/ticks.conf.
+    
+    hm_r      = 0.96
+    hm_w      = 0.025
+    hm_pad    = 0.005
+    
+    #hm_colors = greys-4-seq,greys-4-seq,greys-4-seq,greys-4-seq,greys-4-seq
+    hm_colors = reds-4-seq,oranges-4-seq,greens-4-seq,blues-4-seq,purples-4-seq
+    
+    # HEATMAPS
+    ###
+    
+    <plots>
+    
+    # Remove these lines if you don't have heatmaps.
+    <<include heatmap.conf>>
+    <<include heatmap.conf>>
+    <<include heatmap.conf>>
+    <<include heatmap.conf>>
+    <<include heatmap.conf>>
+    
+    <plot>
+    type       = text
+    file       = data/structure.label.txt
+    color      = black
+    label_font = default
+    label_size = 20
+    r0         = 1r
+    r1         = 1.5r
+    rpadding   = 10p
+    </plot>
+    
+    </plots>
+    
+    <links>
+    
+    <link>
+    file          = data/links.txt
+    
+    # If you don't have heatmaps, change radius to
+    # radius = dims(ideogram,radius_inner) 
+    
+    radius        = 0.825r # eval(sprintf("%fr",conf(hm_r)-counter(heatmap)*(conf(hm_w)+conf(hm_pad))+conf(hm_w)))
+    bezier_radius = 0r
+    bezier_radius_purity = 0.5
+    crest         = 0.25
+    thickness     = 2
+    color         = black
+    
+    <rules>
+    <rule>
+    # this rule is part of variant #1
+    # to use it, set use=yes and also adjust radius above to 0.7r
+    use       = no
+    condition = var(chr1) eq var(chr2)
+    bezier_radius = 1r
+    radius    = 0.71r
+    flow      = continue
+    </rule>
+    <rule>
+    condition = 1
+    thickness = eval(remap_int(var(score),0,1,1,5)) 
+    flow      = continue
+    </rule>
+    <rule>
+    condition = var(type) == 0 
+    color     = eval(sprintf("greys-5-seq-%d",remap_int(var(score),0,1,1,5)))
+    </rule>
+    <rule>
+    condition = var(type) == 1
+    color     = eval(sprintf("reds-5-seq-%d",remap_int(var(score),0,1,1,5)))
+    </rule>
+    </rules>
+    
+    </link>
+    
+    </links>
+    
+    <<include etc/colors_fonts_patterns.conf>>
+    <colors>
+    <<include color.brain.conf>>
+    </colors>
+    
+    restrict_parameter_names* = no
+    <<include etc/housekeeping.conf>>
+```
+  
 
+* * *
+
+#### bands.conf
+```    
+    show_bands            = yes
+    fill_bands            = yes
+    band_stroke_thickness = 1
+    band_stroke_color     = black
+    band_transparency     = 0
+```
+  
+
+* * *
+
+#### color.brain.conf
+```    
+    trfpogs = 255,153,153
+    fmargs = 204,0,51
+    mfs = 255,153,51
+    lors = 102,0,0
+    sbors = 255,51,102
+    ors = 255,204,204
+    rg = 255,204,153
+    inffgorp = 153,51,0
+    mfg = 255,255,51
+    org = 255,255,153
+    inffgtrip = 255,0,0
+    inffs = 153,102,0
+    medors = 255,102,0
+    supfg = 255,102,102
+    supfs = 204,153,0
+    inffgopp = 255,204,0
+    infprcs = 255,153,0
+    supprcs = 255,0,102
+    prcg = 204,102,0
+    sbcgs = 255,102,153
+    cs = 255,51,0
+    alshorp = 0,255,204
+    acirins = 102,255,255
+    alsverp = 0,255,255
+    shoing = 51,255,204
+    supcirins = 0,153,153
+    loingcins = 0,204,204
+    infcirins = 0,102,102
+    posls = 204,255,255
+    acggs = 255,255,180
+    macggs = 255,240,191
+    sbcag = 255,153,200
+    percas = 255,164,200
+    mposcggs = 255,224,203
+    cgsmarp = 255,192,201
+    posdcgg = 255,175,201
+    posvcgg = 255,208,202
+    tpo = 255,204,255
+    popl = 204,153,255
+    suptglp = 153,51,255
+    hg = 102,0,102
+    atrcos = 153,0,204
+    trts = 255,153,255
+    mtg = 255,102,204
+    tpl = 153,0,153
+    inftg = 255,0,255
+    infts = 204,0,153
+    supts = 204,51,255
+    poscg = 204,255,204
+    sumarg = 204,255,102
+    pacls = 204,255,153
+    poscs = 153,255,0
+    js = 153,204,0
+    sbps = 102,153,0
+    intpstrps = 51,255,51
+    suppl = 153,255,153
+    prcun = 204,255,0
+    angg = 0,255,0
+    pocs = 204,255,51
+    pahipg = 204,204,255
+    coslins = 153,204,255
+    locts = 153,153,255
+    fug = 102,102,255
+    ccs = 102,153,255
+    ling = 102,204,255
+    aocs = 51,51,255
+    infocgs = 51,153,255
+    supocstrocs = 0,102,255
+    postrcos = 51,102,255
+    cun = 0,153,255
+    mocg = 0,204,244
+    mocslus = 0,51,255
+    supocg = 0,0,255
+    ocpo = 0,0,153
+    pu = 32,32,32
+    pal = 64,64,64
+    can = 96,96,96
+    nacc = 128,128,128
+    amg = 159,159,159
+    tha = 191,191,191
+    hip = 223,223,223
+    ceb = 255,64,0
+    bst = 207,255,48
+```
+  
+
+* * *
+
+#### heatmap.conf
+```    
+    <plot>
+    type         = heatmap
+    file         = data/measure.counter(heatmap).txt
+    color        = eval((split(",","conf(hm_colors)"))[counter(heatmap)])
+    r1           = eval(sprintf("%fr",conf(hm_r)-counter(heatmap)*(conf(hm_w)+conf(hm_pad))))
+    r0           = eval(sprintf("%fr",conf(hm_r)-counter(heatmap)*(conf(hm_w)+conf(hm_pad))+conf(hm_w)))
+    
+    stroke_color = white
+    stroke_thickness = 3
+    </plot>
+```
+  
+
+* * *
+
+#### ideogram.conf
+```    
+    <ideogram>
+    
+    <spacing>
+    default = 0.005r
+    <pairwise fro-l fro-r>
+    spacing = 5r
+    </pairwise>
+    </spacing>
+    
+    <<include ideogram.position.conf>>
+    <<include ideogram.label.conf>>
+    <<include bands.conf>>
+    
+    </ideogram>
+``````
+  
+
+* * *
+
+#### ideogram.label.conf
+```    
+    show_label       = yes
+    label_font       = default
+    label_radius     = dims(image,radius)-30p
+    label_size       = 24
+    label_parallel   = yes
+    label_case       = upper
+    
+    # you can format the label by using properties
+    # of the ideogram, accessible with var(PROPERTY):
+    #
+    # chr, chr_with_tag, chrlength, display_idx, end, idx, 
+    # label, length, reverse, scale, size, start, tag
+    
+    #label_format     = eval(sprintf("region %s",var(label)))
+```
+  
+
+* * *
+
+#### ideogram.position.conf
+```    
+    radius           = 0.85r
+    thickness        = 75p
+    fill             = no
+    stroke_thickness = 1
+    stroke_color     = black
+```
+  
+
+* * *
+
+#### segment.order.conf
+```    
+    chromosomes_order = fro-r,ins-r,lim-r,tem-r,par-r,occ-r,sbc-r,ceb-r,bst,ceb-l,sbc-l,occ-l,par-l,tem-l,lim-l,ins-l,fro-l
+```
+  
+
+* * *
+
+#### ticks.conf
+```    
+    show_ticks          = yes
+    show_tick_labels    = yes
+    show_grid           = yes
+    
+    <ticks>
+    
+    radius           = dims(ideogram,radius_outer)
+    color            = black
+    thickness        = 2p
+    size             = 0
+    
+    <tick>
+    spacing        = 0.5u
+    size           = 5p
+    grid           = yes
+    grid_color     = black
+    grid_thickness = 1p
+    grid_start     = 1r-conf(ideogram,thickness)
+    grid_end       = 0.825r
+    </tick>
+    
+    <tick>
+    spacing        = 1u
+    </tick>
+    
+    </ticks>
+```
+  
+
+* * *

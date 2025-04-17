@@ -1,5 +1,6 @@
 import pickle
 import os
+import module.circos_markdown_init as cmi
 
 urlTree = dict()
 dirList = []
@@ -40,9 +41,9 @@ def get_dir(dict_tree: dict, father: str = "", url: str = "/"):
                 )
         else:
             dirList.append({
-                "dir": url + key + ".md",
+                "dir": url + key,
                 "category": father,
-                "title": dict_tree["text"]
+                "title": dict_tree["chrild"][key]["text"]
             })
 
 
@@ -53,11 +54,22 @@ def main():
         urlTree = pickle.load(f)
     get_dir(urlTree)
     for item in dirList:
-        fList = []
-        with open(download_folder+item["dir"], "r", encoding="UTF-8") as r_f:
-            fList = r_f.readlines()
-            r_f.close()
-        with open(page_folder+item["dir"], "w+", encoding="UTF-8") as w_f:
+        fList = [f"## {item["title"]}\n"]
+        types = ["lesson", "images", "configuration"]
+        for type in types:
+            fList.append(f"### {type}\n")
+            with open(download_folder+item["dir"]+'/'+type+".md", "r", encoding="UTF-8") as r_f:
+                fList += cmi.init(r_f.readlines())
+                r_f.close()
+
+        dir = os.path.dirname(page_folder+item["dir"]+".md")
+        if not os.path.exists(dir):
+            try:
+                os.makedirs(dir)
+            except BaseException as e:
+                print(f"E: Get error [{e}]")
+
+        with open(page_folder+item["dir"]+".md", "w+", encoding="UTF-8") as w_f:
             header = gen_jekyll_header(item)
             for line in header:
                 w_f.write(line)

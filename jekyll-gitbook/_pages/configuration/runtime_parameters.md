@@ -3,41 +3,18 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: Runtime Parameters
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 7\. Runtime Parameters
-
-### checking version
-
-    
-    
+## Runtime Parameters
+### lesson
+#### checking version
+```    
     > circos -version
     circos | v 0.67-pre5 | 12 May 2014
-    
-
-### checking for missing modules
-
-    
-    
+```
+#### checking for missing modules
+```    
     > circos -modules
     ok       1.26 Carp
     ok       0.37 Clone
@@ -45,10 +22,8 @@ series](https://mk.bcgsc.ca/pointsofview).
     ok       3.33 Cwd
     ok      2.145 Data::Dumper
     ...
-    
-
-### specifying the configuration file
-
+```
+#### specifying the configuration file
 All aspects of the image are controlled by the [plain-text configuration
 file](/documentation/tutorials/configuration/configuration_files). I
 conventionally name this file `circos.conf`, but you can use whatever name you
@@ -56,20 +31,16 @@ like.
 
 This file is specified at run-time using the `-conf` flag an
 
-    
-    
+```    
     > circos -conf myimage.conf
-    
-
+```
 Using `circos.conf` is convenient because Circos will automatically attempt to
 find a file of this name for its configuration.
 
-    
-    
+```    
     # automatically search for circos.conf
     > circos
-    
-
+```
 Circos will search each combination of the path `A/B/C` for the file where
 
   * `A` = `cwd`, location of `circos` script 
@@ -78,101 +49,78 @@ Circos will search each combination of the path `A/B/C` for the file where
 
 For example, the following will be searched (among others)
 
-    
-    
+```    
     ./circos.conf
     ./etc/circos.conf
     ./../etc/circos.conf
-    
-
+```
 To see a list of paths that are searched, use the `-debug_group` flag.
 
-    
-    
+```    
     > circos -debug_group io
-    
-    
-
-### adjusting output image location
-
+``````
+#### adjusting output image location
 Use `-outputdir` and `-outputfile` to change the output image location and
 name. These parameters are typically set in the <image> block in the
 configuration file with the `dir` and `file` parameters
 
-    
-    
+```    
     <image>
     dir  = /path/to/your/output/directory
     file = yourimage.png
     ...
     </image>
-    
-
+```
 but you can override them at the command-line
 
-    
-    
+```    
     > bin/circos -conf etc/circos.conf 
                  -outputdir /path/to/your/output/directory 
                  -outputfile yourimage.png
-    
-
-### dumping configuration values
-
+```
+#### dumping configuration values
 To see all the internal configuration values, provide all parameters as you
 would normally to generate the image but also add `-cdump`. You'll see a
 formatted data structure of your image's configuration.
 
-    
-    
+```    
     > circos ... -cdump
-    
-
-### changing parameters on the command line
-
+```
+#### changing parameters on the command line
 All configuration file parameters can be adjusted on the command line using
 the `-param` flag. The syntax is
 
-    
-    
+```    
     circos -param block1/block2/.../name=value
-    
-
+```
 which will change the parameter `name` in the block <block1><block2>,
 overriding any value already defined in the configuration file.
 
-    
-    
+```    
     <block1>
      <block2>
      ...
       name
-    
-
+```
 For example,
 
-    
-    
+```    
     circos -param karyotype=myfile.txt ...
     circos -param image/radius=500p
     circos -param ideogram/show=no
-    
-
+```
 You can undefine a parameter by changing its value to `undef`
 
-    
-    
+```    
     circos -param chromosomes=undef
-    
-
+```
 This will effectively remove the parameter from the configuration. There
 should be no reason to have to do this but it is included in cases where you
 want to avoid inheriting a parameter from the parent block in some cases.
 
 The full list of shortcuts is
 
-    
-    
+```    
     # check required modules
     modules
     
@@ -202,14 +150,12 @@ The full list of shortcuts is
     
     # randomize all colors
     randomcolor
-    
-
+```
 Use these as flags. For example,
 
-    
-    
+```    
     circos -modules
     circos ... -nosvg
     circos ... -randomcolor
-    
-
+```### images
+### configuration

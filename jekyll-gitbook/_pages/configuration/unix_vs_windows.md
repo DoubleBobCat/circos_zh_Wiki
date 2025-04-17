@@ -3,29 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: configuration
-title: Installation and Configuration
+title: UNIX vs Windows
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 1 — Configuration and Installation
-
-## 1\. UNIX vs Windows
-
+## UNIX vs Windows
+### lesson
 If you are having trouble with installation of Perl or modules, use online
 resources that explain the details of how to [download
 Perl](https://www.perl.org/get.html), get it working
@@ -106,16 +88,13 @@ tutorials
   * [Windows command-line tutorial](https://www.bleepingcomputer.com/tutorials/tutorial76.html)
   * [Windows command-line prompt in 15 minutes](https://www.cs.princeton.edu/courses/archive/spr05/cos126/cmd-prompt.html)
 
-### Perl Installation
-
+#### Perl Installation
 UNIX has Perl installed by default, and unless your system is ancient. To
 check your Perl version,
 
-    
-    
+```    
     > perl -v
-    
-
+```
 Anything earlier than 5.8 should be upgraded.
 
 If you're a Windows user, it's likely that you're unfamiliar with Perl. There
@@ -133,16 +112,13 @@ hosts, among other things, Perl modules contributed by the community. Details
 of downloading and installing modules can be found in the [Perl and Modules
 section](/documentation/tutorials/configuration/perl_and_modules).
 
-### Circos Installation
-
+#### Circos Installation
 On UNIX, you only need to unpack the Circos archive in a suitable location
 with `tar`. For example,
 
-    
-    
+```    
     > tar xvfz circos-0.67-pre4.tgz
-    
-
+```
 Windows users should use Windows' built-in handling of `.tgz` files (in
 Windows Vista or newer). The `.tgz` extension is a short version of `.tar.gz`,
 which more explicitly indicates that the file is a `tar` archive which has
@@ -156,16 +132,13 @@ Circos installation details are listed in the [Distribution and
 Installation](/documentation/tutorials/configuration/distribution_and_installation)
 section.
 
-### Running Circos
-
+#### Running Circos
 For UNIX users the `bin/circos` file is executable, so just run that. The
 first line of `bin/circos` is
 
-    
-    
+```    
     #!/bin/env perl
-    
-
+```
 which automatically uses the perl binary in your `PATH`. If you don't have
 `/bin/env`, it may be in `/bin/usr/env`, such as on Mac OS X.
 
@@ -174,11 +147,9 @@ the argument.
 
 Windows won't know what to do with the `bin\circos` file otherwise.
 
-    
-    
+```    
     perl bin\circos
-    
-
+```
 Details about running Circos can be found in the [Distribution and
 Installation](/documentation/tutorials/configuration/distribution_and_installation)
 section. Command-line flags that adjust run-time parameters are described in
@@ -186,28 +157,24 @@ the [Runtime
 Parameters](/documentation/tutorials/configuration/runtime_parameters)
 tutorial.
 
-### path delimiter
-
+#### path delimiter
 Windows file paths use `\`as a directory separator, whereas UNIX uses `/`. The
 UNIX convention is used throughout the tutorials.
 
 Windows users should interpret paths like
 
-    
-    
+```    
     tutorials/2/2/circos.conf
 
 as
 
-    
-    
+```    
     tutorials\2\2\circos.conf
 
 Circos tutorials are included in a separate package which you will need to
 [download](/software/download/tutorials).
 
-### Configuration
-
+#### Configuration
 Because the directory structure of UNIX and Windows is different, you may need
 to adjust the output directory for tutorial examples. For example, on UNIX
 `/tmp` is used as a scratch directory (e.g. for creating temporary files). On
@@ -219,29 +186,25 @@ about these and other parameters, see the [Runtime
 Parameters](/documentation/tutorials/configuration/runtime_parameters)
 tutorial.
 
-    
-    
+```    
     # on Windows, executed from the Circos installation directory
     perl bin\circos -conf tutorials\2\2\circos.conf -outputdir . -outputfile tutorial_image.png
-    
-
-### Batch Files
-
+```
+#### Batch Files
 In some tools and tutorial directories you'll come across UNIX batch files
 that look something like this
 
-    
-    
+```    
     # tools/tableviewer/makeimage
     #!/bin/bash
     ...
     cat samples/table-$n.txt | bin/parse-table -conf samples/parse-table-$n.conf | bin/make-conf -dir data
     ...
-    
-
+```
 These are written in the BASH shell (a UNIX scripting language) and cannot be
 run directly on Windows (e.g. in a DOS window). To run these files you'll need
 to install a [UNIX shell
 environment](https://stackoverflow.com/questions/913912/bash-shell-for-
 windows) for Windows like [Cygwin](https://www.cygwin.com/).
-
+### images
+### configuration

@@ -3,33 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: recipes
-title: Recipes
+title: Naming Names
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 9 — Recipes
-
-## 23\. Naming Names
-
-[Lesson](/documentation/tutorials/recipes/naming_names/lesson)
-[Images](/documentation/tutorials/recipes/naming_names/images)
-[Configuration](/documentation/tutorials/recipes/naming_names/configuration)
-
+## Naming Names
+### lesson
 One of the first uses of Circos in popular print was Jonathan Corum's [Naming
 Names](https://www.nytimes.com/interactive/2007/12/15/us/politics/DEBATE.html)
 graphic in the New York Times, which visualized the names used by major
@@ -38,8 +16,7 @@ leading up to the Iowa caucuses.
 
 This tutorial shows you how to create this kind of image.
 
-### not just for genomics
-
+#### not just for genomics
 [Jonathan Corum describes the use of Circos for this
 graphic](https://www.nytimes.com/2008/02/25/business/media/25asktheeditors.html?pagewanted=5&_r=1):
 
@@ -73,8 +50,7 @@ Don't think necessarily from the point of view of how to construct input
 files. First, identify what you want to show and how. Make a sketch of the
 kind of figure you want to make. This is the hard part.
 
-### karyotype file
-
+#### karyotype file
 In the [Ideograms Tutorial](/documentation/tutorials/ideograms/ideograms/) I
 have briefly mentioned that ideograms can be used to depict any axis, not just
 a stretch of sequence like a chromosome or contig. In this example, the
@@ -84,8 +60,7 @@ The karyotype file defines these segments. For example, we'll say that Obama
 delivered 2,000 words, Richardson 1,000 words, and so on. The actual values
 would probably be much higher.
 
-    
-    
+```    
     # karyotype.txt
     chr - obama obama 0 2000 dem
     chr - richardson richardson 0 1000 dem
@@ -93,14 +68,12 @@ would probably be much higher.
     chr - mccain mccain 0 1000 rep
     chr - romney romney 0 1750 rep
     chr - huckabee huckabee 0 1250 rep
-    
-
+```
 The last field sets the color of the segments, according to the typical
 blue/red scheme for republicans and democrats. I've used the RGB values used
 by Jonathan.
 
-    
-    
+```    
     <<include etc/colors_fonts_patterns.conf>>
     
     # append to the colors block
@@ -108,15 +81,12 @@ by Jonathan.
     rep = 211,121,111
     dem = 85,143,190
     </colors>
-    
-
-### segment slices
-
+```
+#### segment slices
 Each segment is divided into slices. The slice represents the number of words
 delivered in a specific debate.
 
-    
-    
+```    
     # slices.txt
     obama 0 300     # Obama's 1st debate words
     obama 301 750   #         2nd
@@ -124,12 +94,138 @@ delivered in a specific debate.
     obama 951 1250  #         4th
     obama 1251 1500 #         5th
     obama 1501 2000 #         6th
-    
-
+```
 These slices are drawn as hollow highlights on top of the ideograms, with a
 thick white outline.
 
+```    
+    <plot>
+    file  = slices.txt
+    type  = highlight
+    r0    = dims(ideogram,radius_inner)
+    r1    = dims(ideogram,radius_outer)
+    fill_color       = undef
+    stroke_color     = white
+    stroke_thickness = 5
+    </plot>
+```
+#### naming names
+When a candidate mentions the name of another candidate during his speech, we
+draw a link. The link starts at the debate slice in which the other candidate
+name is mentioned. The link ends at the center of the segment of the mentioned
+candidate.
+
+```    
+    # links.txt
+    # Obama mentions Clinton in his 1st debate
+    obama 150 150 clinton 750 750
+    # McCain mentions Clinton in his 3rd debate
+    mccain 875 875 clinton 750 750
+    # Huckabee mentions Clintin in his 2nd debate
+    huckabee 525 525 clinton 750 750
+```
+By default, the link color is set to `rep`, which is the republican red.
+
+```    
+    <link>
+    file      = links.txt
+    radius    = dims(ideogram,radius_inner)
+    bezier_radius = 0r
+    thickness = 5
+    color     = rep 
+    ...
+```
+A rule is added to change the link color to `dem` if the refering candidate is
+a democrat.
+
+```    
+    <rules>
+    <rule>
+    # set dem color if start is on a democrat
+    condition = var(chr1) =~ /obama|richardson|clinton/
+    color     = dem
+    </rule>
+    </rules>
+```
+#### focusing on a candidate
+To show links from a given candidate, use the `from()` function which returns
+the name of the starting segment.
+
+```    
+    <rule>
+    # only links from obama are shown (all others are hidden by setting show=no)
+    # the condition test is equivalent to
+    #   var(chr1) ne "obama"
+    condition = ! from(obama)  
+    show      = no
+    </rule>
+```
+Or, to test the identity of the segment at the end of the link, use the `to()`
+function.
+
+```    
+    <rule>
+    # only links to mccain are shown (all others are hidden by setting show=no)
+    # the condition test is equivalent to
+    #   var(chr2) ne "mccain"
+    condition = ! to(mccain)
+    show      = no
+    </rule>
+```
+Use the `fromto()` function to test both ends
+
+```    
+    <rule>
+    # only links from obama to mccain are shown (all others are hidden by setting show=no)
+    # the condition test is equivalent to
+    #   var(chr1) ne "obama" || var(chr2) ne "mccain"
+    condition = ! fromto(obama,mccain)
+    show      = no
+    </rule>
+```### images
+![Circos tutorial image - Naming
+Names](/documentation/tutorials/recipes/naming_names/img/00.png)
+### configuration
+#### circos.conf
+```    
+    <<include etc/colors_fonts_patterns.conf>>
     
+    <colors>
+    rep = 211,121,111
+    dem = 85,143,190
+    </colors>
+    
+    <<include ideogram.conf>>
+    <<include ticks.conf>>
+    
+    <image>
+    <<include etc/image.conf>>
+    </image>
+    
+    chromosomes_units           = 1
+    chromosomes_display_default = yes
+    
+    karyotype = karyotype.txt
+    
+    <links>
+    <link>
+    file      = links.txt
+    radius    = dims(ideogram,radius_inner)
+    bezier_radius = 0r
+    thickness = 5
+    color     = rep # make it republican, by default
+    <rules>
+    <rule>
+    # set dem color if start is on a democrat
+    condition = var(chr1) =~ /obama|richardson|clinton/
+    color     = dem
+    </rule>
+    </rules>
+    </link>
+    
+    </links>
+    
+    <plots>
     
     <plot>
     file  = slices.txt
@@ -141,92 +237,84 @@ thick white outline.
     stroke_thickness = 5
     </plot>
     
+    <plot>
+    z    = 10
+    type = highlight
+    file = axis.txt
+    r0   = dims(ideogram,radius_outer) - 2p
+    r1   = dims(ideogram,radius_outer) + 3p
+    fill_color = black
+    </plot>
+    </plots>
+    
+    <<include etc/housekeeping.conf>>
+    track_defaults* = undef
+```
+  
 
-### naming names
+* * *
 
-When a candidate mentions the name of another candidate during his speech, we
-draw a link. The link starts at the debate slice in which the other candidate
-name is mentioned. The link ends at the center of the segment of the mentioned
-candidate.
+#### ideogram.conf
+```    
+    <ideogram>
+    
+    <spacing>
+    
+    default = 0.01r
+    
+    </spacing>
+    
+    <<include ideogram.position.conf>>
+    <<include ideogram.label.conf>>
+    
+    </ideogram>
+``````
+  
 
-    
-    
-    # links.txt
-    # Obama mentions Clinton in his 1st debate
-    obama 150 150 clinton 750 750
-    # McCain mentions Clinton in his 3rd debate
-    mccain 875 875 clinton 750 750
-    # Huckabee mentions Clintin in his 2nd debate
-    huckabee 525 525 clinton 750 750
-    
+* * *
 
-By default, the link color is set to `rep`, which is the republican red.
+#### ideogram.label.conf
+```    
+    show_label       = yes
+    label_font       = default
+    label_radius     = dims(image,radius)-70p
+    label_with_tag   = yes
+    label_size       = 40
+    label_parallel   = yes
+    label_case       = upper
+```
+  
 
-    
-    
-    <link>
-    file      = links.txt
-    radius    = dims(ideogram,radius_inner)
-    bezier_radius = 0r
-    thickness = 5
-    color     = rep 
-    ...
-    
+* * *
 
-A rule is added to change the link color to `dem` if the refering candidate is
-a democrat.
+#### ideogram.position.conf
+```    
+    radius           = 0.90r
+    thickness        = 150p
+    fill             = yes
+```
+  
 
-    
-    
-    <rules>
-    <rule>
-    # set dem color if start is on a democrat
-    condition = var(chr1) =~ /obama|richardson|clinton/
-    color     = dem
-    </rule>
-    </rules>
-    
+* * *
 
-### focusing on a candidate
+#### ticks.conf
+```    
+    show_ticks          = yes
+    show_tick_labels    = yes
+    
+    <ticks>
+    radius           = dims(ideogram,radius_outer)
+    multiplier       = 1
+    color            = black
+    thickness        = 4p
+    size             = 20p
+    
+    <tick>
+    spacing        = 100u
+    </tick>
+    
+    </ticks>
+```
+  
 
-To show links from a given candidate, use the `from()` function which returns
-the name of the starting segment.
-
-    
-    
-    <rule>
-    # only links from obama are shown (all others are hidden by setting show=no)
-    # the condition test is equivalent to
-    #   var(chr1) ne "obama"
-    condition = ! from(obama)  
-    show      = no
-    </rule>
-    
-
-Or, to test the identity of the segment at the end of the link, use the `to()`
-function.
-
-    
-    
-    <rule>
-    # only links to mccain are shown (all others are hidden by setting show=no)
-    # the condition test is equivalent to
-    #   var(chr2) ne "mccain"
-    condition = ! to(mccain)
-    show      = no
-    </rule>
-    
-
-Use the `fromto()` function to test both ends
-
-    
-    
-    <rule>
-    # only links from obama to mccain are shown (all others are hidden by setting show=no)
-    # the condition test is equivalent to
-    #   var(chr1) ne "obama" || var(chr2) ne "mccain"
-    condition = ! fromto(obama,mccain)
-    show      = no
-    </rule>
-    
-
+* * *

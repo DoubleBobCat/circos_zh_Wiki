@@ -3,33 +3,11 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: image_maps
-title: Image Maps
+title: Image Maps - Introduction and Clickable Ideograms
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 11 — Image Maps
-
-## 1\. Image Maps - Introduction and Clickable Ideograms
-
-[Lesson](/documentation/tutorials/image_maps/ideograms/lesson)
-[Images](/documentation/tutorials/image_maps/ideograms/images)
-[Configuration](/documentation/tutorials/image_maps/ideograms/configuration)
-
+## Image Maps - Introduction and Clickable Ideograms
+### lesson
 HTML image maps allow you to associate areas of the image with web links. Any
 element in the image (ideogram, tick, band, highlight, ribobn, etc) can have
 an associated URL. When you publish both the image and the image map on a web
@@ -41,8 +19,7 @@ mouse-over these images to see the effect of the map. The links associated
 with each element are bogus, though, so don't be surprised if they lead
 nowhere.
 
-### using image maps
-
+#### using image maps
 Using client-side image maps is simple, and you can get more information about
 image maps
 [elsewhere](https://htmlhelp.com/reference/html40/special/map.html).
@@ -53,8 +30,7 @@ in Circos). To use the image map, you need to place the contents of the
 `circos.html` file within the web page, and then use the `USEMAP` attribute in
 the `IMG` tag to associate the image with the map.
 
-    
-    
+```    
     <!-- first the contents of the ciros.html file -->
     <map name='circosmap'>
     <area shape='poly' coords='769,362,778,361,777,348,767,349' ...
@@ -63,8 +39,7 @@ the `IMG` tag to associate the image with the map.
     </map>
     <!-- now the image element -->
     <img src="circos.png" usemap="#circosmap">
-    
-
+```
 As you can see, the image map file is composed of a <map> tag, which has an
 associated name parameter and, inside this block, multiple <area> tags. Each
 area tag defines a clickable area in the image as a rectangle, circle or
@@ -76,21 +51,18 @@ your web server installation). For dynamic pages, the script that generates
 the page would be responsible for injecting the image map contents into HTML
 stream.
 
-### preparing to use maps
-
+#### preparing to use maps
 Parameters that toggle and define image map properties are found in the
 <image> block of the configuration file. If you set
 
-    
-    
+```    
     <image>
     ...
     image_map_use      = yes
     image_map_name     = circosmap
     ...
     </image>
-    
-
+```
 you will get an image map written to the same directory as the image file. The
 image map file will have the same filename as the image file, but with an
 `.html` extension.
@@ -105,14 +77,12 @@ Once you've toggled the use of image maps using image_map_use, you still need
 to define URLs to populate the map. In this tutorial, I will describe how to
 associate URLs with ideograms.
 
-### setting image map parameters on the command line
-
+#### setting image map parameters on the command line
 You can override any parameter in the configuration file using the `-param`
 command-line flag. If the parameter is inside a block, specify the block
 hierarchy and parameter with `/` as delimiter.
 
-    
-    
+```    
     # set value of karyotype parameter in root of configuration
     circos -param karyotype=myfile.txt
     
@@ -121,10 +91,8 @@ hierarchy and parameter with `/` as delimiter.
     
     # set several parameters in <image> block
     circos -param image/image_map_use=yes -param image/image_map_file=myfile.html
-    
-
-### making ideograms clickable
-
+```
+#### making ideograms clickable
 Image maps are implemented consistently (at least I've tried to do this) for
 all image elements (ideograms, ticks, highlights, ribbons, etc). The approach
 to defining and making dynamic URLs of ideograms will generally apply to all
@@ -134,14 +102,12 @@ tutorials in this section.
 To associate a URL with an ideogram, use `ideogram_url` in the <ideogram>
 block.
 
-    
-    
+```    
     <ideogram>
     ideogram_url = https://www.google.com
     ...
     </ideogram>
-    
-
+```
 That's it. Now, every ideogram in the image (as well as ideogram labels) will
 link to www.google.com. This is demonstrated in the first image of this
 tutorial.
@@ -153,23 +119,19 @@ This is a boring example, because it is unlikely that you would want to link
 to the same URL from every ideogram. Let's now look at how to make the URL
 dynamic.
 
-### dynamic URLs
-
+#### dynamic URLs
 The `ideogram_url` string can contain fields which refer to properties of the
 ideogram. For example,
 
-    
-    
+```    
     ideogram_url = https://www.google.com/search?q=[chr]
-    
-
+```
 will result in each ideogram having a unique link because when the URL is
 generated for each ideogram, the string `[chr]` will be replaced by the value
 of the `chr` parameter for the ideogram. In general, any string in the url in
 square brackets will be replaced by the value of the parameter.
 
-### URL parameters
-
+#### URL parameters
 For ideograms, you have access to the following parameters.
 
   * chr - name of the ideogram (e.g. hs1) 
@@ -186,31 +148,26 @@ Each of these can be used any number of times in the URL as
 `[parameter_name]`. For example, if you have a script at `/cgi-bin/script`
 which understands the CGI parameter named chromosome, you might use
 
-    
-    
+```    
     ideogram_url = /cgi-bin/script?chromosome=[chr]
-    
-
+```
 Each image element (ideogram, tick, highlight, ribbon, etc) will have its own
 set of parameters, though many will have a shared set (e.g. start, end).
 
 In the third example image of this tutorial, I've created an image map which
 uses all of the parameters. This is overkill, but you get the idea.
 
-    
-    
+```    
     ideogram_url = script?type=ideogram&start=[start]&end=[end]
                           &length=[chrlength]&chr=[chr]&tag=[tag]
                           &label=[label]&idx=[idx]
                           &display_idx=[display_idx]&scale=[scale]
-    
-
+```
 Notice that this URL is relative (it doesn't start with a `/`). Also notice
 that I've added a `type=ideogram` parameter pair to the URL - you can mix
 static and dynamic parameters to suit your application.
 
-### defining URLs specific to individual ideograms
-
+#### defining URLs specific to individual ideograms
 In the examples above, the `ideogram_url` string was defined in the
 configuration file. This definition was applied to each ideogram. Individual
 URLs could have dynamic elements, with the use of parameters described above,
@@ -224,59 +181,49 @@ URL definitions.
 Recall that the karyotype file contains the definitions of each chromosome and
 any cytogenetic bands.
 
-    
-    
+```    
     chr - hs1 1 0 247249719 chr1
     chr - hs2 2 0 242951149 chr2
     chr - hs3 3 0 199501827 chr3
     ...
-    
-
+```
 You can attach a custom URL definition to any chromosome by adding a url
 parameter
 
-    
-    
+```    
     chr - hs1 1 0 247249719 chr1 url=special_script?chr=[chr]
     chr - hs2 2 0 242951149 chr2 url=another_special_script?chr=[chr]
     chr - hs3 3 0 199501827 chr3
     ...
-    
-
+```
 In this case, ideograms for `chr1` and `chr2` will have URLs distinct from all
 other ideograms. If you have defined `ideogram_url` in the configuration file,
 other chromosomes will have URLs based on this parameter. If `ideogram_url` is
 not defined, then only `chr1` and `chr2` will have URLs.
 
-### incorporating custom tags via id parameter
-
+#### incorporating custom tags via id parameter
 The `id` parameter, supported by any element, is a useful way to tag your
 element with any string. This gives you a way to reference an element with an
 identifier that fits your application (e.g. primary key of a database).
 
 To do so, add the `id` parameter to the karyotype file
 
-    
-    
+```    
     chr - hs1 1 0 247249719 chr1 id=string001,url=special_script?id=[id]&chr=[chr]
     chr - hs2 2 0 242951149 chr2 id=string002,url=another_special_script?id=[id]&chr=[chr]
     chr - hs3 3 0 199501827 chr3 id=string003
     ...
-    
-
+```
 and, for example, define the `ideogram_url` as
 
-    
-    
+```    
     ideogram_url = script?id=[id]
-    
-
+```
 The result will be the same as in the example above, except now the URL
 incorporates the id parameter value, which we manually defined for each
 chromosome.
 
-### using rules to adjust URLs
-
+#### using rules to adjust URLs
 It should not surpise you that you can use rules to adjust URL parameters.
 Just like adjusting color, stroke, position, or value of a data point, you can
 adjust the URL based on a rule.
@@ -285,8 +232,7 @@ URLs of any image elements that support rule blocks (plots, links, highlights)
 can be manipulated in rules. Ideograms and ticks do not support rules at this
 time. I will show an example of rules in a subsequent tutorial.
 
-### strict image maps — handling missing parameters
-
+#### strict image maps — handling missing parameters
 If a url definition uses a parameter which is not defined, then one of three
 things happen.
 
@@ -298,36 +244,29 @@ setting is draconic but safe.
 If `image_map_missing_parameter=removeparam`, the `[parameter_name]` field
 will be removed. Any parameters that remain will be used. For example, if
 
-    
-    
+```    
     url = script?x=[x]&y=[y]
-    
-
+```
 and parameter `y` is not defined for an element, the effect will be the same
 as if we defined this url for that element.
 
-    
-    
+```    
     url = script?x=[x]&y=
-    
-
+```
 Finally, if `image_map_missing_parameter=removeurl`, then the URL is not used.
 In other words, the element will not have an entry in the image map.
 
-### scaling and shifting image maps
-
+#### scaling and shifting image maps
 The parameters
 
-    
-    
+```    
     <image>
     image_map_xshift
     image_map_yshift
     image_map_xfactor
     image_map_yfactor
     </image>
-    
-
+```
 are used to transform the values of image map coordinates using a translation
 and scaling.
 
@@ -344,20 +283,231 @@ resize the image later. For example, if you create a 3000 x 3000 pixel image
 800/3000 = 2.666667. Unless you are stretching the image (don't do it!) both
 factors should have the same value.
 
-### debugging image maps
-
+#### debugging image maps
 For debugging purposes, you can overlay the image map elements on top of the
 PNG image (not SVG). Each element in the overlay can have a fill color and
 stroke color. Note that if you add any x/y shift or multiplicative factors
 (above) then the overlay will reflect those factors.
 
-    
-    
+```    
     <image>
     image_map_overlay              = yes
     image_map_overlay_fill_color   = lred_a4
     image_map_overlay_stroke_color = red
     image_map_overlay_stroke_thickness = 8
     </image>
+```### images
+![Circos tutorial image - Image Maps - Introduction and Clickable
+Ideograms](/documentation/tutorials/image_maps/ideograms/img/01.png) ![Circos
+tutorial image - Image Maps - Introduction and Clickable
+Ideograms](/documentation/tutorials/image_maps/ideograms/img/02.png) ![Circos
+tutorial image - Image Maps - Introduction and Clickable
+Ideograms](/documentation/tutorials/image_maps/ideograms/img/03.png) ![Circos
+tutorial image - Image Maps - Introduction and Clickable
+Ideograms](/documentation/tutorials/image_maps/ideograms/img/04.png) ![Circos
+tutorial image - Image Maps - Introduction and Clickable
+Ideograms](/documentation/tutorials/image_maps/ideograms/img/05.png)
+### configuration
+#### circos.conf
+```    
+    <<include colors_fonts_patterns.conf>>
     
+    <<include ideogram.conf>>
+    <<include ticks.conf>>
+    
+    karyotype   = data/karyotype/karyotype.human.txt
+    
+    <image>
+    <<include etc/image.conf>>
+    
+    ################################################################
+    # Image map
+    
+    image_map_use      = yes
+    
+    # If a url uses a variable field, such as [id], and
+    # the corresponding parameter (e.g. id) is not defined,
+    # then 
+    # - if image_map_missing_parameter=exit, Circos will exit with an error
+    # - if image_map_missing_parameter=removeparam (or not defined), the
+    #      undefined parameter string will be removed
+    # - if image_map_missing_parameter=removeurl, url will not be used 
+    #      for that data point or data set
+    
+    #image_map_missing_parameter = exit
+    
+    # This is the name of the map, which will appear in the
+    # <map name="NAME"> tag of the map. If not defined, the
+    # name of the image will be used.
+    
+    #image_map_name     = circosmap
+    
+    # The image map will be written to this file. If this
+    # value is not defined, then the filename will be used
+    # with an html extension. If the file specified here
+    # does not have a directory component, the output
+    # directory defined by the dir parameter (see above)
+    # will be prefixed (i.e. the map and image will be
+    # created in the same directory).
+    
+    #image_map_file     = map.html
+    
+    # If urls are not preceeded by a protocol, then this
+    # protocol will be automatically added to each url. This is
+    # not strictly necessary, since your browser will assume 
+    # that http is used. However, if you need https or some other
+    # protocol, this is the field to adjust.
+    
+    #image_map_protocol = http
+    
+    # These values, when defined, will be added to each
+    # x,y coordinate of the map element boundary. These offsets
+    # are useful if the Circos image will be composited with
+    # another image, or cropped, or manipulated in any manner
+    # that shifts its original (0,0) (upper left) corner. You
+    # can define one or both values, and they can be negative.
+    
+    #image_map_xshift = 0
+    #image_map_yshift = 0
+    
+    # These factors will be used to multiply the x,y coordinates for each
+    # map element boundary. These parameters are useful if you are going
+    # to resize the image later. For example, if you create a 3000 x 3000
+    # pixel image (radius=1500px), but publish a 800 x 800 pixel image,
+    # set both factors to 800/3000 = 2.666667. Unless you are stretching
+    # the image (don't do it!) both factors should have the same value
+    
+    #image_map_xfactor = 0.266667
+    #image_map_yfactor = 0.266667
+    
+    # For debugging purposes, you can overlay the image map elements on
+    # top of the PNG image (not SVG). Each element in the overlay can have
+    # a fill color and stroke color. Note that if you add any x/y shift or
+    # multiplicative factors (above) then the overlay will reflect those
+    # factors.
+    
+    image_map_overlay                  = yes
+    #image_map_overlay_fill_color      = lred_a5
+    image_map_overlay_stroke_color     = red
+    image_map_overlay_stroke_thickness = 2
+    
+    </image>
+    
+    chromosomes_units           = 1000000
+    #chromosomes                = hs1:0-50
+    chromosomes_display_default = yes
+    
+    <<include etc/housekeeping.conf>>
+```
+  
 
+* * *
+
+#### bands.conf
+```    
+    show_bands            = yes
+    fill_bands            = yes
+    band_stroke_thickness = 2
+    band_stroke_color     = white
+    band_transparency     = 3
+```
+  
+
+* * *
+
+#### ideogram.conf
+```    
+    <ideogram>
+    
+    <spacing>
+    default = 0.005r
+    break   = 0.5r
+    </spacing>
+    
+    <<include ideogram.position.conf>>
+    <<include ideogram.label.conf>>
+    <<include bands.conf>>
+    
+    #ideogram_url = https://www.google.com
+    #ideogram_url = https://www.google.com/search?q=[chr]
+    #ideogram_url = script?type=ideogram&start=[start]&end=[end]&length=[chrlength]&chr=[chr]&tag=[tag]&label=[label]&idx=[idx]&display_idx=[display_idx]&scale=[scale]
+    #ideogram_url = script?chr=[chr]
+    band_url = script?start=[start]&end=[end]&label=[label]
+    
+    </ideogram>
+``````
+  
+
+* * *
+
+#### ideogram.label.conf
+```    
+    show_label       = yes
+    label_font       = default
+    label_radius     = dims(image,radius) - 70p
+    label_size       = 48
+    label_parallel   = yes
+    label_case       = upper
+```
+  
+
+* * *
+
+#### ideogram.position.conf
+```    
+    radius           = 0.85r
+    thickness        = 100p
+    fill             = yes
+    fill_color       = black
+    stroke_thickness = 2
+    stroke_color     = black
+```
+  
+
+* * *
+
+#### ticks.conf
+```    
+    show_ticks          = yes
+    show_tick_labels    = yes
+    
+    <ticks>
+    tick_separation      = 3p
+    label_separation     = 5p
+    radius               = dims(ideogram,radius_outer)
+    multiplier           = 1e-6
+    color          = black
+    size           = 20p
+    thickness      = 4p
+    label_offset   = 5p
+    format         = %d
+    
+    <tick>
+    spacing        = 1u
+    show_label     = yes
+    label_size     = 16p
+    </tick>
+    
+    <tick>
+    spacing        = 5u
+    show_label     = yes
+    label_size     = 18p
+    </tick>
+    
+    <tick>
+    spacing        = 10u
+    show_label     = yes
+    label_size     = 20p
+    </tick>
+    
+    <tick>
+    spacing        = 20u
+    show_label     = yes
+    label_size     = 24p
+    </tick>
+    
+    </ticks>
+```
+  
+
+* * *

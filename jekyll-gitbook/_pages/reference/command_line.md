@@ -3,36 +3,16 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: reference
-title: Reference
+title: Command Line Parameters
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 12 — Circos Reference
-
-## 3\. Command Line Parameters
-
-### using command-line flags
-
+## Command Line Parameters
+### lesson
+#### using command-line flags
 Circos is driven by a configuration file, but accepts several command-line
 flags that change how it runs (e.g. format and location of output files).
 
-    
-    
+```    
     # no flags - Circos guesses location if configuration file
     > circos
     
@@ -59,13 +39,11 @@ flags that change how it runs (e.g. format and location of output files).
     
     # run and shut up
     > circos -silent
-    
-
+```
 Configuration flags can be shortened, as long as the shortened version is
 unambigous.
 
-    
-    
+```    
     > circos -cdump image
     > circos -cdum image
     > circos -cdu image
@@ -74,25 +52,20 @@ unambigous.
     > circos -c image
     Option c is ambiguous (cdump, chromosomes, chromosomes_display_default, chromosomes_order, 
     chromosomes_radius, chromosomes_scale, color_cache_rebuild, color_cache_static, configfile)
-    
-
+```
 The `-param` flag allows you to conveniently change the value of any
 configuration parameter.
 
-    
-    
+```    
     # change image size
     > circos -param image/radius=2000p
     # do not draw ideograms
     > circos -param ideogram/show=no
     # draw only two chromosomes
     > circos -param chromosomes_display_default=no -param chromosomes=hs1;hs2
-    
-
-### Circos command-line flags
-
-#### configuration
-
+```
+#### Circos command-line flags
+##### configuration
 flag
 
 description
@@ -147,8 +120,7 @@ _e.g._ `-cdump ideogram/spacing:def`
 
 * * *
 
-#### usage
-
+##### usage
 flag
 
 description
@@ -177,8 +149,7 @@ Print the version.
 
 * * *
 
-#### debugging
-
+##### debugging
 flag
 
 description
@@ -268,8 +239,7 @@ OPTION `-nowarnings`
 
 * * *
 
-#### I/O
-
+##### I/O
 flag
 
 description
@@ -318,8 +288,7 @@ OPTION `-nosvg`
 
 * * *
 
-#### color
-
+##### color
 flag
 
 description
@@ -350,4 +319,5 @@ Generates an image in which all colors except for those listed are randomized.
 _e.g._ `-randomcolor white,black`
 
   
-
+### images
+### configuration

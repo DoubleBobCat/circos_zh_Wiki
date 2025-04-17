@@ -3,35 +3,16 @@ author: DoubleCat
 date: 2025-04-11
 layout: post
 category: reference
-title: Reference
+title: <ideogram> block
 ---
 
-Use the [latest version of Circos](/software/download/circos/) and read
-[Circos best
-practices](/documentation/tutorials/reference/best_practices/)—these list
-recent important changes and identify sources of common problems.
-
-If you are having trouble, post your issue to the [Circos Google
-Group](https://groups.google.com/group/circos-data-visualization) and [include
-all files and detailed error logs](/support/support/). Please do not email me
-directly unless it is urgent—you are much more likely to receive a timely
-reply from the group.
-
-Don't know what question to ask? Read [Points of View: Visualizing Biological
-Data](https://www.nature.com/nmeth/journal/v9/n12/full/nmeth.2258.html) by
-Bang Wong, myself and invited authors from the [Points of View
-series](https://mk.bcgsc.ca/pointsofview).
-
-# 12 — Circos Reference
-
-## 6\. <ideogram> block
-
+## <ideogram> block
+### lesson
 You are strongly encouraged to use the default image block from the Circos
 distribution (`etc/image.conf`), rather than rolling your own. Override any
 parameters with the `*` suffix.
 
-    
-    
+```    
     ################################################################
     # circos.conf
     <<include ideogram.conf>>
@@ -41,12 +22,9 @@ parameters with the `*` suffix.
     <ideogram>
      ...
     </ideogram>
-    
-
-### syntax
-
-    
-    
+```
+#### syntax
+```    
     <ideogram>
     
      <spacing>
@@ -82,10 +60,8 @@ parameters with the `*` suffix.
      </rules>
     
     </ideogram>
-    
-
-### block parameters
-
+```
+#### block parameters
 **Flags** R required, + multiple instances allowed.
 
 **Units** Parameters that require units (`p` pixel, `r` relative, `u` value of
@@ -246,8 +222,7 @@ REQUIRED BY `stroke_color`
 
   
 
-### cytogenetic bands
-
+#### cytogenetic bands
 parameter
 
 description
@@ -302,8 +277,7 @@ REQUIRED BY `band_stroke_thickness`
 
   
 
-### ideogram label
-
+#### ideogram label
 parameter
 
 description
@@ -385,8 +359,7 @@ VALUE `EXPR`
 
   
 
-### axis breaks
-
+#### axis breaks
 **Tutorial** [Spacing & Axis
 Breaks](/documentation/tutorials/ideograms/spacing_breaks).
 
@@ -428,8 +401,7 @@ TUTORIALS [ideograms/cropping](/documentation/tutorials/ideograms/cropping),
 
   
 
-### <spacing> block
-
+#### <spacing> block
 **Tutorial** [Spacing & Axis
 Breaks](/documentation/tutorials/ideograms/spacing_breaks).
 
@@ -474,15 +446,13 @@ TUTORIALS
 
   
 
-### <pairwise> block
-
+#### <pairwise> block
 **Tutorial** [Spacing & Axis
 Breaks](/documentation/tutorials/ideograms/spacing_breaks).
 
 The name of the block defines to which ideogram pair the spacing applies.
 
-    
-    
+```    
     # adjust spacing between chr1 and chr2
     <pairwise chr1 chr2>
     </pairwise>
@@ -490,8 +460,7 @@ The name of the block defines to which ideogram pair the spacing applies.
     # adjust spacing around chr1
     <pairwise chr1>
     </pairwise>
-    
-
+```
 parameter
 
 description
@@ -520,15 +489,13 @@ VALUE `FLOAT [ur]`
 
   
 
-### <break_style> block
-
+#### <break_style> block
 **Tutorial** [Spacing & Axis
 Breaks](/documentation/tutorials/ideograms/spacing_breaks).
 
 This block defines one of two types of axis break styles.
 
-    
-    
+```    
     # style 1 definition
     <break_style 1>
     </break_style>
@@ -536,8 +503,7 @@ This block defines one of two types of axis break styles.
     # style 2 definition
     <break_style 2>
     </break_style>
-    
-
+```
 The style to be used is defined by `axis_break_style`.
 
 parameter
@@ -589,4 +555,5 @@ VALUE `COLOR`
 `black`
 
   
-
+### images
+### configuration
