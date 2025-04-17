@@ -1,3 +1,11 @@
+---
+author: DoubleCat
+date: 2025-04-11
+layout: post
+category: 2d_tracks
+title: 2D Data Tracks
+---
+
 Use the [latest version of Circos](/software/download/circos/) and read
 [Circos best
 practices](/documentation/tutorials/reference/best_practices/)—these list
