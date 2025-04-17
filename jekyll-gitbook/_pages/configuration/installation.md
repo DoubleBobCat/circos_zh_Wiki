@@ -6,7 +6,6 @@ category: configuration
 title: Installation
 ---
 
-## Installation
 ### lesson
 If you are having trouble with installation of Perl or modules, use online
 resources that explain the details of how to [download

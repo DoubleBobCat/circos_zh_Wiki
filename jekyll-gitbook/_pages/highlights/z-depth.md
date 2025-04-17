@@ -6,7 +6,6 @@ category: highlights
 title: Highlight Parameters - Part II - Using z-depth
 ---
 
-## Highlight Parameters - Part II - Using z-depth
 ### lesson
 z-depth, which controls the order in which highlights are drawn, is a critical
 parameter in creating effective images. Judiciously layering your data can

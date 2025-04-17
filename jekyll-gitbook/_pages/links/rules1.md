@@ -6,7 +6,6 @@ category: links
 title: Link Rules - Part I
 ---
 
-## Link Rules - Part I
 ### lesson
 Rules are special blocks within <plot> or <link> blocks which redefine how
 data (e.g. links) are displayed based on position, value, format or any other

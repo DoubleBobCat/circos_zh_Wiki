@@ -6,7 +6,6 @@ category: recipes
 title: Link Geometry - Detailed Bezier Control
 ---
 
-## Link Geometry - Detailed Bezier Control
 ### lesson
 The raison d'etre of Circos is the ability to draw links. Links are covered in
 tutorial 5. Link geometry is controlled by many parameters (see tutorial 5.2).

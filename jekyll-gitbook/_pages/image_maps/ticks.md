@@ -6,7 +6,6 @@ category: image_maps
 title: Clickable Tick Marks
 ---
 
-## Clickable Tick Marks
 ### lesson
 To create links that access regions of an ideogram, define a `url` parameter
 within a <tick> mark block.

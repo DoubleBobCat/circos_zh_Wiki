@@ -6,7 +6,6 @@ category: quick_start
 title: Links & Rules
 ---
 
-## Links & Rules
 ### lesson
 The first data track we will add are links. Links represent an association
 between two genomic positions (e.g. similarity, difference, fusion, etc) by

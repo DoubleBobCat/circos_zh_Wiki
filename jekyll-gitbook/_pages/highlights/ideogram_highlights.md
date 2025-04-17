@@ -6,7 +6,6 @@ category: highlights
 title: Ideogram Highlights
 ---
 
-## Ideogram Highlights
 ### lesson
 Ideogram highlights are placed on top of the ideograms in the figure. You do
 not need to specify the radial position of these highlights, because these

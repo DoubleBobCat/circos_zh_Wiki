@@ -6,7 +6,6 @@ category: links
 title: Link Rules - Part V
 ---
 
-## Link Rules - Part V
 ### lesson
 In the previous examples of rules, I triggered rules to adjust format
 parameters of links or data points based on their position (start, end,

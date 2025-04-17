@@ -6,7 +6,6 @@ category: reference
 title: <rule> block
 ---
 
-## <rule> block
 ### lesson
 ### images
 ### configuration

@@ -6,7 +6,6 @@ category: highlights
 title: Wedge Highlights
 ---
 
-## Wedge Highlights
 ### lesson
 Highlights are special track type used for highlighting regions of the image
 created by Circos. Highlights are defined in a <highlights> block are

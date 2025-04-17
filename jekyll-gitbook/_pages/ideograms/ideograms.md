@@ -6,7 +6,6 @@ category: ideograms
 title: Ideograms
 ---
 
-## Ideograms
 ### lesson
 #### biological context
 In a biological context, the axes in a Circos image usually correspond to

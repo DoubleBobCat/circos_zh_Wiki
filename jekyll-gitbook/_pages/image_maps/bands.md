@@ -6,7 +6,6 @@ category: image_maps
 title: Image Maps - Clickable Cytogenetic Bands
 ---
 
-## Image Maps - Clickable Cytogenetic Bands
 ### lesson
 Chromosomes can have cytogenetic bands associated with them in the karyotype
 file. These bands serve to define distinct regions on the chromosome.

@@ -6,7 +6,6 @@ category: quick_start
 title: Heat Maps & Colors
 ---
 
-## Heat Maps & Colors
 ### lesson
 Heat maps are used for data types which associate a value with a genomic
 position, or region. As such, this track uses the same data format as

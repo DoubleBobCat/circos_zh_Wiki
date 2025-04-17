@@ -6,7 +6,6 @@ category: scaling
 title: Global Scale Adjustment
 ---
 
-## Global Scale Adjustment
 ### lesson
 This series of tutorials focuses on adjusting ideogram scale, both globally
 and locally. By scale I mean the quantity

@@ -6,7 +6,6 @@ category: reference
 title: <image> block
 ---
 
-## <image> block
 ### lesson
 You are strongly encouraged to use the default image block from the Circos
 distribution (`etc/image.conf`), rather than rolling your own. Override any

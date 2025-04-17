@@ -6,7 +6,6 @@ category: utilities
 title: Reordering Ideograms to Minimize Overlap
 ---
 
-## Reordering Ideograms to Minimize Overlap
 ### lesson
 [Lesson](/documentation/tutorials/utilities/minimize_crossing/lesson)
 [Images](/documentation/tutorials/utilities/minimize_crossing/images)

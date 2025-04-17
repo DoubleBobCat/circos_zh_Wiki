@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Putting It All Together
 ---
 
-## Putting It All Together
 ### lesson
 In this example, I create an image with a large number of plot tracks that
 include all the types previously discussed. The image looks like a heart

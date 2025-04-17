@@ -6,7 +6,6 @@ category: configuration
 title: UNIX vs Windows
 ---
 
-## UNIX vs Windows
 ### lesson
 If you are having trouble with installation of Perl or modules, use online
 resources that explain the details of how to [download

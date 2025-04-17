@@ -6,7 +6,6 @@ category: utilities
 title: Visualizing Categorical Data
 ---
 
-## Visualizing Categorical Data
 ### lesson
 [Lesson](/documentation/tutorials/utilities/categorical_data/lesson)
 [Images](/documentation/tutorials/utilities/categorical_data/images)

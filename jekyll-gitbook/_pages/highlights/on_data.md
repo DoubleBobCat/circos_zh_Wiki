@@ -6,7 +6,6 @@ category: highlights
 title: Drawing on Top of Data
 ---
 
-## Drawing on Top of Data
 ### lesson
 Highlights defined in <highlight> blocks are always drawn behind links, data,
 and grids.

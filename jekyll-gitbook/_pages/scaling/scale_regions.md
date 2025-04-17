@@ -6,7 +6,6 @@ category: scaling
 title: Adjusting Scale for Regions
 ---
 
-## Adjusting Scale for Regions
 ### lesson
 Before I get into local scale adjustment in the next tutorial, I want to cover
 a simple way to adjust the scale in a region of an ideogram.

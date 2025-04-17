@@ -6,7 +6,6 @@ category: reference
 title: Best Practices
 ---
 
-## Best Practices
 ### lesson
 This is a very important document—well worth reading. Chances are if you have
 asked a question in the [Google Group](https://groups.google.com/group/circos-

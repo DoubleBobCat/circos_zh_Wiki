@@ -6,7 +6,6 @@ category: configuration
 title: Common Errors
 ---
 
-## Common Errors
 ### lesson
 If Circos halts with an error, before contacting me or posting to the
 [discussion group](https://groups.google.com/group/circos-data-visualization),

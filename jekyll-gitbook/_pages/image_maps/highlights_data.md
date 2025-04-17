@@ -6,7 +6,6 @@ category: image_maps
 title: Clickable Highlights and Data
 ---
 
-## Clickable Highlights and Data
 ### lesson
 In addition to ideograms, bands and ticks, data elements such as highlights,
 scatter plots, histograms, text and ribbons can be associated with a link. The

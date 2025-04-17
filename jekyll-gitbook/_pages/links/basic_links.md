@@ -6,7 +6,6 @@ category: links
 title: Drawing Basic Links
 ---
 
-## Drawing Basic Links
 ### lesson
 One of the core uses of Circos is to show the relationships between positions
 on axes. Axes might be chromosomes and might indicate translocations. Or the

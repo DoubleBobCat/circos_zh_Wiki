@@ -6,7 +6,6 @@ category: highlights
 title: Recipe 2 - Focusing on a Genome Region
 ---
 
-## Recipe 2 - Focusing on a Genome Region
 ### lesson
 In many of the examples in this series of tutorials, the highlights were used
 to draw data sets, such as gene position. Highlights are very useful for

@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Tick Marks - Margins
 ---
 
-## Tick Marks - Margins
 ### lesson
 If your ticks are densely spaced, they may overlap and form dreaded tick
 blobs. Likewise, tick labels can start to overlap and lose their legibility.

@@ -6,7 +6,6 @@ category: scaling
 title: Creating Zoomed Regions
 ---
 
-## Creating Zoomed Regions
 ### lesson
 Local scale adjustment is one of the coolest features of Circos. In the first
 two examples in this tutorial section you saw how to adjust local scale by

@@ -6,7 +6,6 @@ category: recipes
 title: Image Maps
 ---
 
-## Image Maps
 ### lesson
 HTML image maps are now fully implemented and described in [Tutorial
 10](?tutorials&id=10).

@@ -6,7 +6,6 @@ category: recipes
 title: Circular Stacked Bar Plots
 ---
 
-## Circular Stacked Bar Plots
 ### lesson
 This tutorial shows how to use Circos to create a general information graphic,
 not related to genome visualization. Or at least, not obviously related.

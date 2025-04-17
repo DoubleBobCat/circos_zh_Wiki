@@ -6,7 +6,6 @@ category: highlights
 title: Highlight Parameters - Part III - Radial Position
 ---
 
-## Highlight Parameters - Part III - Radial Position
 ### lesson
 In the previous section I demonstrated how you can adjust the radial extent,
 by setting r0,r1 in the data file, to encode information about the highlight.

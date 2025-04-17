@@ -6,7 +6,6 @@ category: links
 title: Link Rules - Part IV
 ---
 
-## Link Rules - Part IV
 ### lesson
 Rules can be used to set formatting values based on a function of
 characteristics of the link. For example, you can define the thickness of the

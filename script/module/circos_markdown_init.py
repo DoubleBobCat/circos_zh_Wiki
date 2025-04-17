@@ -61,9 +61,6 @@ def main_clean(fList: list) -> list:
 
 
 def init(fList: list) -> list:
-    os.system("cls")
-    for line in fList:
-        print(line)
     return main_clean(clean_header(fList))
 
 

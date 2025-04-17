@@ -6,7 +6,6 @@ category: reference
 title: <axis> block
 ---
 
-## <axis> block
 ### lesson
 ### images
 ### configuration

@@ -6,7 +6,6 @@ category: recipes
 title: Pattern Fills
 ---
 
-## Pattern Fills
 ### lesson
 Ribbons, heatmaps and histograms can be drawn with a pattern fill by setting
 the `pattern` parameter.

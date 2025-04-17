@@ -6,7 +6,6 @@ category: ideograms
 title: Ordering
 ---
 
-## Ordering
 ### lesson
 Ideograms are ordered using the chromosomes_order field.
 

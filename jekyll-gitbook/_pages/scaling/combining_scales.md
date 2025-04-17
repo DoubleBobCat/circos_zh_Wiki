@@ -6,7 +6,6 @@ category: scaling
 title: Combining Scales
 ---
 
-## Combining Scales
 ### lesson
 In this final example, I combine all the scale adjustments discussed in this
 tutorial section into one image. I've added a histogram plot, in addition to

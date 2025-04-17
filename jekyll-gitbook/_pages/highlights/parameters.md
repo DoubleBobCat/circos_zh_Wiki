@@ -6,7 +6,6 @@ category: highlights
 title: Highlight Parameters - Part I - Embedded in Data File
 ---
 
-## Highlight Parameters - Part I - Embedded in Data File
 ### lesson
 In this tutorial, I'll cover how to embed highlight parameters in your
 highlight data file. This is a convenient way of formatting highlights because

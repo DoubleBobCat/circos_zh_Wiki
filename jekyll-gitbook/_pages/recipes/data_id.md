@@ -6,7 +6,6 @@ category: recipes
 title: ID Fields
 ---
 
-## ID Fields
 ### lesson
 In this tutorial, I will demonstrate how to apply formatting to data based on
 its identifier stored in the `id` field.

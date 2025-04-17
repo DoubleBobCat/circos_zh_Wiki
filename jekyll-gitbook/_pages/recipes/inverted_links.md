@@ -6,7 +6,6 @@ category: recipes
 title: Inverted Links
 ---
 
-## Inverted Links
 ### lesson
 In this tutorial, I will show how to write rules that format inverted links.
 

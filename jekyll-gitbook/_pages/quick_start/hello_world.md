@@ -6,7 +6,6 @@ category: quick_start
 title: Hello World
 ---
 
-## Hello World
 ### lesson
 This is the first of a series of tutorials that show you how to build a Circos
 image from scratch. Whereas other tutorials (e.g.

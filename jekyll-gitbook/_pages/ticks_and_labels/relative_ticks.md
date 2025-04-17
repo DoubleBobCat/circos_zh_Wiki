@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Relative Ticks
 ---
 
-## Relative Ticks
 ### lesson
 Ticks can be spaced and/or labeled in relative units, with respect to the
 length of the ideogram to which they belong. Up to now, you've seen how to

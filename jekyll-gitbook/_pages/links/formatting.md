@@ -6,7 +6,6 @@ category: links
 title: Link Formatting
 ---
 
-## Link Formatting
 ### lesson
 In this example, the image will be created using multiple data sources for
 links. I'm also going to subvert the record_limit setting, and in combination

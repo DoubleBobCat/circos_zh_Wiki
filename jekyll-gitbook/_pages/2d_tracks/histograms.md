@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Histograms
 ---
 
-## Histograms
 ### lesson
 Circos' histograms are a variation on the line plot. In a line plot, adjacent
 points are connected by a straight line whereas in a histogram the points form

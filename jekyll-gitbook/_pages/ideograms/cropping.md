@@ -6,7 +6,6 @@ category: ideograms
 title: Cropping
 ---
 
-## Cropping
 ### lesson
 If you do not wish to have the entire ideogram drawn, you can choose to create
 an axis break and remove a region from the display. This can be achieved in

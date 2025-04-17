@@ -6,7 +6,6 @@ category: scaling
 title: Overlapping Zoomed Regions
 ---
 
-## Overlapping Zoomed Regions
 ### lesson
 When overlapping zoom regions are defined, the zoom level at an ideogram
 position is taken to be the highest (in absolute terms) zoom of any

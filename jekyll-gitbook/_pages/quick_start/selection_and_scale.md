@@ -6,7 +6,6 @@ category: quick_start
 title: Ideogram Selection, Scale, Color & Orientation
 ---
 
-## Ideogram Selection, Scale, Color & Orientation
 ### lesson
 In this section, we will adjust which chromosomes are drawn and change their
 scale, color and orientation.

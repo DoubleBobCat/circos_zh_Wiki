@@ -6,7 +6,6 @@ category: links
 title: Link Geometry
 ---
 
-## Link Geometry
 ### lesson
 Link geometry is defined by four parameters: radius, bezier_radius,
 bezier_radius_purity and crest. An additional set of parameters in the

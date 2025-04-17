@@ -6,7 +6,6 @@ category: recipes
 title: Cortical Maps—Connectograms
 ---
 
-## Cortical Maps—Connectograms
 ### lesson
 In this example I will show you how to create maps of the brain connectome
 using Circos — a _connectogram_. Images of this type have recently appeared in

@@ -6,7 +6,6 @@ category: recipes
 title: Image Transparency and Background
 ---
 
-## Image Transparency and Background
 ### lesson
 In addition to the colors you define in color.conf, an additional color called
 "transparent" is automatically defined for you. Therefore, if you try to

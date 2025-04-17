@@ -54,7 +54,7 @@ def main():
         urlTree = pickle.load(f)
     get_dir(urlTree)
     for item in dirList:
-        fList = [f"## {item["title"]}\n"]
+        fList = []
         types = ["lesson", "images", "configuration"]
         for type in types:
             fList.append(f"### {type}\n")

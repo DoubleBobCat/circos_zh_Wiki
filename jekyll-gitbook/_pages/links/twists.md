@@ -6,7 +6,6 @@ category: links
 title: Ribbon Twists
 ---
 
-## Ribbon Twists
 ### lesson
 A ribbon is drawn as a filled path. The corner vertices of the path are the
 start and end positions of the spans defined by the link.

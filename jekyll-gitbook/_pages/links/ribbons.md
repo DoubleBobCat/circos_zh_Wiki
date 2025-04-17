@@ -6,7 +6,6 @@ category: links
 title: Ribbons
 ---
 
-## Ribbons
 ### lesson
 In all previous examples links where drawn as curves of uniform thickness. The
 thickness was set using a parameter and was unrelated to the size of the spans

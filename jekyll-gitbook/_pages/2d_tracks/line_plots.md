@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Line Plots
 ---
 
-## Line Plots
 ### lesson
 The line plot differs from the scatter plot in that there are no glyphs drawn
 at each point position. Rather the points are joined by a line.

@@ -6,7 +6,6 @@ category: quick_start
 title: Ticks & Labels
 ---
 
-## Ticks & Labels
 ### lesson
 In this tutorial, I will add labels to the ideograms as well as ticks and tick
 labels.

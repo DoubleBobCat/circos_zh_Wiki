@@ -6,7 +6,6 @@ category: recipes
 title: Naming Names
 ---
 
-## Naming Names
 ### lesson
 One of the first uses of Circos in popular print was Jonathan Corum's [Naming
 Names](https://www.nytimes.com/interactive/2007/12/15/us/politics/DEBATE.html)

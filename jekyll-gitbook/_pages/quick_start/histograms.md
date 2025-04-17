@@ -6,7 +6,6 @@ category: quick_start
 title: Histograms
 ---
 
-## Histograms
 ### lesson
 In addition to links, which associate two genomic positions, Circos supports
 several data tracks, which associate a position with a value.

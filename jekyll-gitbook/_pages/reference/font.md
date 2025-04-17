@@ -6,7 +6,6 @@ category: reference
 title: <font> block
 ---
 
-## <font> block
 ### lesson
 ### images
 ### configuration

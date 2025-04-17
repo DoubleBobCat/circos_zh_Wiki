@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Heat Maps
 ---
 
-## Heat Maps
 ### lesson
 The heatmap track is a feature that combines the utility of highlights and a
 2D plot. In this track, regions of the genome are assigned a value (e.g.

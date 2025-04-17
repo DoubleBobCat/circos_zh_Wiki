@@ -6,7 +6,6 @@ category: links
 title: Link Rules - Part II
 ---
 
-## Link Rules - Part II
 ### lesson
 Rules are worth learning—they allow you to customize the layering and
 formating your links.

@@ -6,7 +6,6 @@ category: quick_start
 title: Automation & Macros
 ---
 
-## Automation & Macros
 ### lesson
 This is an advanced topic.
 

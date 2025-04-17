@@ -6,7 +6,6 @@ category: ideograms
 title: Variable Radius
 ---
 
-## Variable Radius
 ### lesson
 By default, every ideogram is placed at the same radial position. This is
 controlled by the radius parameter within the <ideogram> block (conventionally

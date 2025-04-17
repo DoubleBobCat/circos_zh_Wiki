@@ -6,7 +6,6 @@ category: scaling
 title: Smoothing Scale
 ---
 
-## Smoothing Scale
 ### lesson
 In the last example, I created a series of regions with gradually
 increasing/decreasing scale in order to avoid large changes in scale over

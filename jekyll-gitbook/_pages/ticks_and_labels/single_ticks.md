@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Ticks at Specific Positions
 ---
 
-## Ticks at Specific Positions
 ### lesson
 Up to now, each tick block defined a tick series, with the positions of ticks
 in a series defined by the spacing (absolute or relative). In this tutorial,

@@ -6,7 +6,6 @@ category: recipes
 title: Transparent Links
 ---
 
-## Transparent Links
 ### lesson
 This tutorial shows how you can improve the layout of your links using color
 transparency. The data for this tutorial was created using tools/randomlinks.

@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Text—Rules
 ---
 
-## Text—Rules
 ### lesson
 This tutorial shows you how to use rules with the text track. All tracks allow
 for rules and using rules works the same way for each track. The [previous

@@ -6,7 +6,6 @@ category: configuration
 title: Configuration Files - Syntax, Colors, Fonts and Units
 ---
 
-## Configuration Files - Syntax, Colors, Fonts and Units
 ### lesson
 [Lesson](/documentation/tutorials/configuration/configuration_files/lesson)
 [Images](/documentation/tutorials/configuration/configuration_files/images)

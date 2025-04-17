@@ -6,7 +6,6 @@ category: links
 title: Link Rules - Part III
 ---
 
-## Link Rules - Part III
 ### lesson
 Rules can affect the geometry of a link. This example expands on the previous
 one and modifies the position of intrachromosomal links to face outward.

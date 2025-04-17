@@ -6,7 +6,6 @@ category: recipes
 title: Microbial Genome
 ---
 
-## Microbial Genome
 ### lesson
 Circos is suitable for creating images of genomes that only have one
 chromosome, such as circular bacterial genomes. This example mentions a few

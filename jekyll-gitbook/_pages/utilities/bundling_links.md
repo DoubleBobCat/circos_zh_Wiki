@@ -6,7 +6,6 @@ category: utilities
 title: Bundling Links
 ---
 
-## Bundling Links
 ### lesson
 [Lesson](/documentation/tutorials/utilities/bundling_links/lesson)
 [Images](/documentation/tutorials/utilities/bundling_links/images)

@@ -6,7 +6,6 @@ category: image_maps
 title: Image Maps - Introduction and Clickable Ideograms
 ---
 
-## Image Maps - Introduction and Clickable Ideograms
 ### lesson
 HTML image maps allow you to associate areas of the image with web links. Any
 element in the image (ideogram, tick, band, highlight, ribobn, etc) can have

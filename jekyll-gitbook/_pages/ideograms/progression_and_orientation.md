@@ -6,7 +6,6 @@ category: ideograms
 title: Progression and Orientation
 ---
 
-## Progression and Orientation
 ### lesson
 #### angle offset
 The angle offset determines the angular position of the first ideogram.

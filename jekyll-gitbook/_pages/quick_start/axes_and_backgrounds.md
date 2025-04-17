@@ -6,7 +6,6 @@ category: quick_start
 title: Axes & Backgrounds
 ---
 
-## Axes & Backgrounds
 ### lesson
 A track's background can be colored using <backgrounds> block and graduated
 using <axes> block.

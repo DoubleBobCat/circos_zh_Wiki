@@ -6,7 +6,6 @@ category: recipes
 title: Heat Map Links
 ---
 
-## Heat Map Links
 ### lesson
 You can color links by an associated value to create a heatmap effect.
 

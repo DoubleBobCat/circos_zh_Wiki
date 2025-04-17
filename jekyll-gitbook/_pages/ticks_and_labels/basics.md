@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Tick Marks - Basics
 ---
 
-## Tick Marks - Basics
 ### lesson
 Ticks, tick labels and grids are defined in the <ticks> block, which can
 contain any number of <tick> blocks, each defining ticks with a different

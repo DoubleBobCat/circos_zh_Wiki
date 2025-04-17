@@ -6,7 +6,6 @@ category: recipes
 title: Automating Tracks
 ---
 
-## Automating Tracks
 ### lesson
 If you are displaying a large number of similar tracks (e.g. 20 histograms),
 which are similarly formatted, you can automate the generation of these tracks

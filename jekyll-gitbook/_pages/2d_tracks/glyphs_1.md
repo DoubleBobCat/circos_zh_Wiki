@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Glyphs—Part I
 ---
 
-## Glyphs—Part I
 ### lesson
 Rules can be used to adjust the text of the label. This is done by setting the
 `value` parameter in the rule. The rule below sets all labels to `X`,

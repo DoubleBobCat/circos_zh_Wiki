@@ -6,7 +6,6 @@ category: reference
 title: Command Line Parameters
 ---
 
-## Command Line Parameters
 ### lesson
 #### using command-line flags
 Circos is driven by a configuration file, but accepts several command-line

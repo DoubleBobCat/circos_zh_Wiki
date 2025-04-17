@@ -6,7 +6,6 @@ category: reference
 title: API
 ---
 
-## API
 ### lesson
 [CircosAPI](https://kylase.github.io/CircosAPI) is a Perl module that is
 written to provide users with a Perl interface to create Circos graphics.

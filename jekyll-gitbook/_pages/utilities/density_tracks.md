@@ -6,7 +6,6 @@ category: utilities
 title: Generate Link Density Tracks
 ---
 
-## Generate Link Density Tracks
 ### lesson
 [Lesson](/documentation/tutorials/utilities/density_tracks/lesson)
 [Images](/documentation/tutorials/utilities/density_tracks/images)

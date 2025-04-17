@@ -6,7 +6,6 @@ category: recipes
 title: Automating Heatmaps
 ---
 
-## Automating Heatmaps
 ### lesson
 Before reading this tutorial, make sure that you understand how dynamic
 configuration parameters work (see [Configuration Files

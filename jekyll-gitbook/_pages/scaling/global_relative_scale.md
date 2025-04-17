@@ -6,7 +6,6 @@ category: scaling
 title: Global Relative Scale Adjustment
 ---
 
-## Global Relative Scale Adjustment
 ### lesson
 In the previous tutorial, I showed how to adjust the magnification of
 ideograms. There, you learned how to make an ideogram twice as large (or twice

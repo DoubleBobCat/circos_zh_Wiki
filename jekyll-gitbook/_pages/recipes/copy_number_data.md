@@ -6,7 +6,6 @@ category: recipes
 title: Copy Number Data
 ---
 
-## Copy Number Data
 ### lesson
 Copy number values, such as those collected from microarray or clone-based
 hybridization experiments, are typically drawn as scatter plots. In this

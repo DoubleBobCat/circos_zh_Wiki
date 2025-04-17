@@ -6,7 +6,6 @@ category: utilities
 title: Visualizing Tabular Data
 ---
 
-## Visualizing Tabular Data
 ### lesson
 [Lesson](/documentation/tutorials/utilities/visualizing_tables/lesson)
 [Images](/documentation/tutorials/utilities/visualizing_tables/images)

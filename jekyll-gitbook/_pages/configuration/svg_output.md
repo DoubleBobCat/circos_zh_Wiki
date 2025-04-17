@@ -6,7 +6,6 @@ category: configuration
 title: SVG Output
 ---
 
-## SVG Output
 ### lesson
 Circos is capable of producing both PNG and SVG images. This section discusses
 SVG files.

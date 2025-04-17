@@ -6,7 +6,6 @@ category: ideograms
 title: Spacing and Axis Breaks
 ---
 
-## Spacing and Axis Breaks
 ### lesson
 #### ideogram spacing
 Spacing between ideograms derived from different chromosomes is controlled by

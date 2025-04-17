@@ -6,7 +6,6 @@ category: recipes
 title: Directed Links
 ---
 
-## Directed Links
 ### lesson
 Circos draws links without orientation. To indicate the direction of the link,
 you need to compose the link track with another track, which will provide an

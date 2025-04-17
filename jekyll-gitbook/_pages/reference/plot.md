@@ -6,7 +6,6 @@ category: reference
 title: <plot> block
 ---
 
-## <plot> block
 ### lesson
 ### images
 ### configuration

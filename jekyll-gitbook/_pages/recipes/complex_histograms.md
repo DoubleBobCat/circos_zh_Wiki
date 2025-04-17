@@ -6,7 +6,6 @@ category: recipes
 title: Complex Histograms
 ---
 
-## Complex Histograms
 ### lesson
 #### mapping value to histogram fill
 The fill of histogram bins can be changed based on the histogram bin value

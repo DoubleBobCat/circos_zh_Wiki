@@ -6,7 +6,6 @@ category: highlights
 title: Recipe 3 - Plot Axis Range Highlights
 ---
 
-## Recipe 3 - Plot Axis Range Highlights
 ### lesson
 In this section, I'll look ahead and show how you can use highlights to
 annotate 2D data plots (e.g. scatter plots).

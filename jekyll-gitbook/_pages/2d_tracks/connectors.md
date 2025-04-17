@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Connectors
 ---
 
-## Connectors
 ### lesson
 Connectors are articulated line segments that relate two positions on an
 ideogram between two radial positions.

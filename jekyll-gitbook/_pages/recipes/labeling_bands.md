@@ -6,7 +6,6 @@ category: recipes
 title: Labeling Karyotype Bands
 ---
 
-## Labeling Karyotype Bands
 ### lesson
 This tutorial show syou how to add a narrow band of text labels to your
 figure. We'll label the cytogenetic bands on the ideograms for the example.

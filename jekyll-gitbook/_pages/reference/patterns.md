@@ -6,7 +6,6 @@ category: reference
 title: <patterns> block
 ---
 
-## <patterns> block
 ### lesson
 ### images
 ### configuration

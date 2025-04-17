@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Scatter Plots
 ---
 
-## Scatter Plots
 ### lesson
 Syntax for 2D data types is similar to that for links. You define all 2D plots
 within >plots< block, with one plot per <plot> block. Within a plot block, you

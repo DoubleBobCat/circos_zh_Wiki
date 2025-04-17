@@ -6,7 +6,6 @@ category: quick_start
 title: Text
 ---
 
-## Text
 ### lesson
 Text tracks are a special 2-dimensional data track, which associates a text
 label with a genomic position.

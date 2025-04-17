@@ -6,7 +6,6 @@ category: configuration
 title: Colors
 ---
 
-## Colors
 ### lesson
 [Lesson](/documentation/tutorials/configuration/colors/lesson)
 [Images](/documentation/tutorials/configuration/colors/images)

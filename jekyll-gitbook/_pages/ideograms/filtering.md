@@ -6,7 +6,6 @@ category: ideograms
 title: Filtering
 ---
 
-## Filtering
 ### lesson
 To remove ideograms from the image, the "chromosomes" and
 "chromosomes_display_default" configuration parameters are used.

@@ -6,7 +6,6 @@ category: scaling
 title: Drawing Data with Scale Adjustment
 ---
 
-## Drawing Data with Scale Adjustment
 ### lesson
 In this example, I use local scale adjustment to draw attention to regions of
 chromosomes 1 and 2 in an image that contains sparse data.

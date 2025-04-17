@@ -6,7 +6,6 @@ category: configuration
 title: Debugging
 ---
 
-## Debugging
 ### lesson
 If Circos is not behaving as you expect, the first thing to do is to run it
 with a `-debug` flag. For example,

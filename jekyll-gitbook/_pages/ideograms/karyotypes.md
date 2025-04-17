@@ -6,7 +6,6 @@ category: ideograms
 title: Karyotypes
 ---
 
-## Karyotypes
 ### lesson
 The karyotype file defines the axes. In biological context, these are
 typically chromosomes, sequence contigs or clones.

@@ -6,7 +6,6 @@ category: ideograms
 title: Tags
 ---
 
-## Tags
 ### lesson
 Up to now, ideograms have been defined solely by their corresponding
 chromosomes' IDs. For example, if in your karyotype file you have entries for

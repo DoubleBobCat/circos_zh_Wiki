@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Tick Marks - Label Margins
 ---
 
-## Tick Marks - Label Margins
 ### lesson
 If your tick marks are densely spaced, their labels may overlap and lose their
 legibility. Like the tick mark margin parameter, tick label margins help you

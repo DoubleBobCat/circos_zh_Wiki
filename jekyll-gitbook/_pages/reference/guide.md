@@ -6,7 +6,6 @@ category: reference
 title: <guide> block
 ---
 
-## <guide> block
 ### lesson
 ### images
 ### configuration

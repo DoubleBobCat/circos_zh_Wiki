@@ -6,7 +6,6 @@ category: recipes
 title: Stacked Histograms
 ---
 
-## Stacked Histograms
 ### lesson
 #### stacking data sets
 Stacked histograms are an extenstion of the histogram track. To plot stacked

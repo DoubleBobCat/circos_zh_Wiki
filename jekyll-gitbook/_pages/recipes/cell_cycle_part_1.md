@@ -6,7 +6,6 @@ category: recipes
 title: Cell Cycle—Part 1
 ---
 
-## Cell Cycle—Part 1
 ### lesson
 This tutorial will show you how to use Circos to create a diagram of a
 [typical cell cycle](https://en.wikipedia.org/wiki/Cell_cycle) (G1, S, G2, M)

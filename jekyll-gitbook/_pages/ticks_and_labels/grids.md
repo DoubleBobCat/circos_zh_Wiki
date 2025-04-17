@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Grids
 ---
 
-## Grids
 ### lesson
 You can add a radial grid to any set of tick marks. Grids are drawn on top of
 highlights, but behind all other data.

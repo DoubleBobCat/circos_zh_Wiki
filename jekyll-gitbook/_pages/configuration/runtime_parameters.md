@@ -6,7 +6,6 @@ category: configuration
 title: Runtime Parameters
 ---
 
-## Runtime Parameters
 ### lesson
 #### checking version
 ```    

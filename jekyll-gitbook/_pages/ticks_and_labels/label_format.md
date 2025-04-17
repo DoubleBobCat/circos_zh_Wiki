@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Label Formats
 ---
 
-## Label Formats
 ### lesson
 In previous tutorials, tick marks have been formatted by a combination of the
 multiplier and format parameters. The multiplier served to derive a value for

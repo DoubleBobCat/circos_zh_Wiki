@@ -6,7 +6,6 @@ category: reference
 title: Configuration Structure and Syntax
 ---
 
-## Configuration Structure and Syntax
 ### lesson
 #### syntax
 Below is a block template for a general configuration file. Not all blocks are

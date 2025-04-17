@@ -6,7 +6,6 @@ category: recipes
 title: Variable Radius Link Ends
 ---
 
-## Variable Radius Link Ends
 ### lesson
 Using entries in the link data file, or rules, you can independently
 manipulate the radial position of each end of a link. One application of this

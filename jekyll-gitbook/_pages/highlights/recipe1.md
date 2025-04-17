@@ -6,7 +6,6 @@ category: highlights
 title: Recipe 1 - Ideogram Highlights
 ---
 
-## Recipe 1 - Ideogram Highlights
 ### lesson
 Ideogram highlights are particularly suitable for data that draws attention to
 some parts of the ideograms, leaving most of the ideogram uncovered. Remember

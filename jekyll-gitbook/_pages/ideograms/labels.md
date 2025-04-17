@@ -6,7 +6,6 @@ category: ideograms
 title: Labels
 ---
 
-## Labels
 ### lesson
 Each ideogram has a label field in the karyotype file
 

@@ -6,7 +6,6 @@ category: utilities
 title: Generating Random Link Data
 ---
 
-## Generating Random Link Data
 ### lesson
 [Lesson](/documentation/tutorials/utilities/random_links/lesson)
 [Images](/documentation/tutorials/utilities/random_links/images)

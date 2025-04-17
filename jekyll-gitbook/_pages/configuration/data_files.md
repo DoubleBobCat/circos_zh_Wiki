@@ -6,7 +6,6 @@ category: configuration
 title: Data Files
 ---
 
-## Data Files
 ### lesson
 Circos uses plain-text data input files. The data format is very
 simple—arguably the simplest that it could be. Creating data files for Circos

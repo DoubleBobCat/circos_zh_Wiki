@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Text—Basic
 ---
 
-## Text—Basic
 ### lesson
 The text label track associates a text string with a genomic span. The text is
 placed radially and, as for scatter plots, positioned with its center line at

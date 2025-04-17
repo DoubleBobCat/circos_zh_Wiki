@@ -6,7 +6,6 @@ category: recipes
 title: Nature Cover Encode Diagram
 ---
 
-## Nature Cover Encode Diagram
 ### lesson
 [Nature's special
 issue](https://www.nature.com/nature/journal/v489/n7414/index.html) dedicated

@@ -6,7 +6,6 @@ category: configuration
 title: PNG Output
 ---
 
-## PNG Output
 ### lesson
 Circos is capable of producing both PNG (24-bit) and
 [SVG](/documentation/tutorials/configuration/svg_output) images. This section

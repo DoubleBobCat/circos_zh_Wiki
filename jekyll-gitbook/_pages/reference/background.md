@@ -6,7 +6,6 @@ category: reference
 title: <background> block
 ---
 
-## <background> block
 ### lesson
 ### images
 ### configuration

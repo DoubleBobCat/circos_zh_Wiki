@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Tick Marks - Offsets
 ---
 
-## Tick Marks - Offsets
 ### lesson
 The radial position of ticks and labels can be adjusted by the offset
 parameter.

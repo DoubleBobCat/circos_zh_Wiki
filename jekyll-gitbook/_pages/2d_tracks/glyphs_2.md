@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Glyphs—Part II
 ---
 
-## Glyphs—Part II
 ### lesson
 Modifying labels into symbols is ideal for making a general glyph tracks. For
 example, consider a list of genes (`data/6/genes.glyph.txt`).

@@ -6,7 +6,6 @@ category: ticks_and_labels
 title: Tick Rings
 ---
 
-## Tick Rings
 ### lesson
 A tick set can be automatically drawn at multiple radial positions if you
 define more than one radius for the set.

@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Text—Stacking
 ---
 
-## Text—Stacking
 ### lesson
 In the previous example, I had drawn just a few labels. If labels are dense,
 they will be automatically stacked to avoid overlap. In other words, if a

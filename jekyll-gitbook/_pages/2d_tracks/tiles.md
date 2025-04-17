@@ -6,7 +6,6 @@ category: 2d_tracks
 title: Tiles
 ---
 
-## Tiles
 ### lesson
 Tile tracks are used to show spans such as genomic regions (genes, exons,
 duplications) or coverage elements (clones, sequence reads). Tiles will stack
