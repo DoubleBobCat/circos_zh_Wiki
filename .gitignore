@@ -1,2 +1,3 @@
 script/stp1_get_wiki.py
-module/__pycache__
+script/module/__pycache__
+script/temp

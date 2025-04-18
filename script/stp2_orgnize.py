@@ -4,8 +4,9 @@ import module.circos_markdown_init as cmi
 
 urlTree = dict()
 dirList = []
-download_folder = "downloads/documentation/tutorials"
-page_folder = "../jekyll-gitbook/_pages"
+download_folder = "temp/stp1/documentation/tutorials"
+# page_folder = "../jekyll-gitbook/_pages"
+page_folder = "temp/stp2/_pages"
 jekyll_header_dict = {
     "author": "DoubleCat",
     "date": "2025-04-11",
