@@ -1,25 +1,51 @@
 import os
+import re
 
 codeBlockSign = "    \n"
+figPattern = r'!\[(.*?)\]\((.*?)\)'
 
 
 def clean_header(fList: list) -> list:
-    mainBegin = None
+    lession_mainBegin = None
+    img_mainBegin = None
+    config_mainBegin = None
     for index in range(len(fList)):
+        if fList[index].startswith("[Lesson]"):
+            lession_mainBegin = index + 1
+        if fList[index].startswith("[Images]"):
+            img_mainBegin = index + 1
         if fList[index].startswith("[Configuration]"):
-            mainBegin = index + 1
+            config_mainBegin = index + 1
             break
-    if mainBegin != None:
-        return fList[mainBegin + 1:]
+    if config_mainBegin != None:
+        return fList[config_mainBegin + 1:]
+    elif img_mainBegin != None:
+        return fList[img_mainBegin + 1:]
+    elif lession_mainBegin != None:
+        return fList[lession_mainBegin + 1:]
     else:
         for index in range(len(fList)):
             if fList[index].startswith("## "):
-                mainBegin = index + 1
+                config_mainBegin = index + 1
                 break
-        if mainBegin != None:
-            return fList[mainBegin + 1:]
+        if config_mainBegin != None:
+            return fList[config_mainBegin + 1:]
         else:
             raise ValueError("Can't find begin in the main!")
+
+
+def figure_clean(fList: list) -> list:
+    oList = []
+    for index in range(len(fList)):
+        condition_figure = True if fList[index].startswith("![") else False
+        if condition_figure:
+            figDict = re.findall(figPattern, fList[index])
+            for idx, (title, link) in enumerate(figDict, 1):
+                oList.append(
+                    f"![{title}]({link.replace("/documentation/tutorials", "")})\n")
+        else:
+            oList.append(fList[index])
+    return oList
 
 
 def main_clean(fList: list) -> list:
@@ -36,7 +62,7 @@ def main_clean(fList: list) -> list:
         condition_level = True if condition_special and fList[index][0] == '#' else False
         if not (codeBlockStartFlag or condition_special):
             if (fList[index] != "\n" and fList[index+1] != "\n"):
-                if fList[index][:1] == "\n":
+                if "\n" in fList[index]:
                     condition_sameSegment = True
         if codeBlockStartFlag:
             if (fList[index] == codeBlockSign and fList[index+1] == "\n"):
@@ -57,6 +83,7 @@ def main_clean(fList: list) -> list:
             oList.append('#' + fList[index][:-1])
         else:
             oList.append(fList[index])
+
     return oList
 
 

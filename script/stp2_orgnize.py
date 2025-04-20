@@ -77,6 +77,15 @@ def main():
             for line in fList:
                 w_f.write(line)
             w_f.close()
+
+        with open(page_folder+item["dir"]+".md", "r", encoding="UTF-8") as r_f:
+            fList = cmi.figure_clean(r_f.readlines())
+            r_f.close()
+        with open(page_folder+item["dir"]+".md", "w+", encoding="UTF-8") as w_f:
+            for line in fList:
+                w_f.write(line)
+            w_f.close()
+
         print(f"I: Processed [{item["dir"]}]")
 
 
